@@ -33,23 +33,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const { username, password } = this.form;
-
-    // this.authService.login(username, password).subscribe(
-    //   data => {
-    //     this.tokenStorage.saveToken(data.accessToken);
-    //     this.tokenStorage.saveUser(data);
-
-    //     this.isLoginFailed = false;
-    //     this.isLoggedIn = true;
-    //     this.roles = this.tokenStorage.getUser().roles;
-    //     this.reloadPage();
-    //     console.log("data : " + data);
-    //   },
-    //   err => {
-    //     this.errorMessage = err.error.message;
-    //     this.isLoginFailed = true;
-    //   }
-    // );
     this.authService.login(username, password).subscribe({
       next: (data) => {
         this.tokenStorage.saveToken(data.accessToken);
@@ -62,11 +45,10 @@ export class LoginComponent implements OnInit {
         console.log("data : " + data);
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.message;
         this.isLoginFailed = true;
       }
     });
-   
   }
 
   reloadPage(): void {

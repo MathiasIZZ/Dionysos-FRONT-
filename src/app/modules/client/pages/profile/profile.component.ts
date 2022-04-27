@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
       this.user = this.tokenStorage.getUser();
       this.id = this.user.id;
     }
-    
+    this.initUser();
   }
 
   initUser() {
