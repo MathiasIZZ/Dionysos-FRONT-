@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  form: any = {
+    username: null,
+    email: null,
+    password: null
+  };
+  isSignup = false;
+  isSignupFailed = false;
+  errorMessage = '';
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void { }
+
+  onSubmit(): void {
+    const { username, email, password } = this.form;
+    this.authService.register(username, email, password).subscribe({
+      next: (data) => {
+        console.log("data : " + data);
+        this.isSignup = true;
+        this.isSignupFailed = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isSignupFailed  = true;
+      }
+    });
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+  goToHome() {
+    window.location.assign("");
   }
 
 }
