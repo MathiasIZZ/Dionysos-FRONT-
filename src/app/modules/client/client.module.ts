@@ -10,6 +10,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { EditEventComponent } from './components/shared/edit-event/edit-event.component';
 import { EditPanelComponent } from './components/shared/edit-panel/edit-panel.component';
 import { ClientRoutingModule } from './client-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from 'src/app/components/shared/navbar/navbar.component';
+import { AppComponent } from 'src/app/app.component';
 
 
 
@@ -27,7 +31,10 @@ import { ClientRoutingModule } from './client-routing.module';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class ClientModule { }

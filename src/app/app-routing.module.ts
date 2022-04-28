@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
+
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then(m => 
@@ -13,19 +14,19 @@ const routes: Routes = [
     path: 'client',
     loadChildren: () => import('./modules/client/client.module').then(m => 
     m.ClientModule)
+
   },
   {
     path: '',
     component: HomeComponent
   },
-
   {
     path: '404', component: NotfoundComponent
   },
-
   {
     path: '**', redirectTo: '/404'
   },
+
 
 ];
 
