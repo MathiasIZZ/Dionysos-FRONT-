@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log(this.router.url)
 
     if(this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
