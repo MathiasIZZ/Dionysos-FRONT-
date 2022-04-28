@@ -1,0 +1,46 @@
+.texteAcceuil {
+    color: #FEDA3C;
+    text-align: center;
+    margin: 1% 1%;
+}
+
+img {
+    width: 100%;
+    max-width: 20%;
+    height: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.partAcceuil {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+@media (max-width:1200px) {
+    img {
+        width: 100%;
+        max-width: 99%;
+        height: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    .partAcceuil {
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+}
+
+@media (max-width:767px) {
+    img {
+        width: 100%;
+        max-width: 99%;
+        height: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    .partAcceuil {
+        margin-top: 25%;
+        margin-bottom: 25%;
+    }
+}
