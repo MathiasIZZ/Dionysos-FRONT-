@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
+
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,12 +17,14 @@ import { RegisterComponent } from './modules/client/pages/register/register.comp
 import { UserComponent } from './modules/client/pages/user/user.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
