@@ -3,3 +3,28 @@ h1 {
     text-align: center;
 }
 
+.map-container {
+    position: absolute;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    bottom: 0;
+    margin: 30px;
+    margin-top: 5%;
+    margin-left: 23%;
+    height: 60%;
+    width: 55%;
+  }
+  
+  .map-frame {
+    // margin-top: 10%;
+    // margin-bottom: 5%;
+    border: 2px solid black;
+    height: 85%;    
+  }
+  
+  #map {
+    height: 100%;
+    max-width: 100%;
+		max-height: 100%;
+  }

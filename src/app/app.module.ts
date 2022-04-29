@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './modules/client/pages/login/login.component';
 import { RegisterComponent } from './modules/client/pages/register/register.component';
 import { UserComponent } from './modules/client/pages/user/user.component';
+import { MarkerService } from './services/marker.service';
+import { PopupPanelService } from './services/popup-panel.service';
 
 
 @NgModule({
@@ -29,7 +31,7 @@ import { UserComponent } from './modules/client/pages/user/user.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, MarkerService, PopupPanelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
