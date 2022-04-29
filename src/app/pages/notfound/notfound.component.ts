@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NotfoundService } from 'src/app/services/notfound.service';
 @Component({
   selector: 'app-notfound',
   templateUrl: './notfound.component.html',
@@ -7,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotfoundComponent implements OnInit {
 
-  urlLogo="../../../assets/images/logo.jpg";
+  urlLogo = "../../../assets/images/logo.jpg";
 
-  constructor() { }
+  constructor(public nav: NotfoundService) {
+
+  }
 
   ngOnInit(): void {
+    this.nav.hide();
+    this.nav.doSomethingElseUseful();
   }
 
 }
