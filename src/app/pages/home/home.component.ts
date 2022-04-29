@@ -27,10 +27,12 @@ export class HomeComponent implements AfterViewInit {
 
   private map?: any;
   isLoggedIn = false;
-
+  urlLogo="../../../assets/images/logo.jpg";
+  
   constructor(
     private markerService: MarkerService,
     private tokenStorageService : TokenStorageService) { }
+
 
   ngAfterViewInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

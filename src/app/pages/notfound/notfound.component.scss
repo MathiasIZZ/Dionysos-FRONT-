@@ -4,32 +4,6 @@
     margin: 1% 1%;
 }
 
-.map-container {
-    position: absolute;
-    // top: 0;
-    // left: 0;
-    // right: 0;
-    bottom: 0;
-    margin: 30px;
-    margin-top: 5%;
-    margin-left: 23%;
-    height: 60%;
-    width: 55%;
-  }
-  
-  .map-frame {
-    // margin-top: 10%;
-    // margin-bottom: 5%;
-    border: 2px solid black;
-    height: 85%;    
-  }
-  
-  #map {
-    height: 100%;
-    max-width: 100%;
-		max-height: 100%;
-  }
-
 img {
     width: 100%;
     max-width: 20%;
@@ -69,4 +43,13 @@ img {
         margin-top: 25%;
         margin-bottom: 25%;
     }
+}
+
+a {
+    text-decoration: none;
+}
+
+.container-fluid {
+    visibility: hidden !important;
+    display: none !important;
 }
