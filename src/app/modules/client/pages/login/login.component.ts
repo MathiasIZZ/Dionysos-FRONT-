@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToProfile() {
-    window.location.assign("/client/profile");
+    window.location.assign("");
   }
 
 }

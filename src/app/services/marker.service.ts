@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
-import { Observable, Subscriber } from 'rxjs';
 import { PopupPanelService } from './popup-panel.service';
 
 @Injectable({
@@ -28,7 +27,8 @@ export class MarkerService {
       id: 'mapbox/streets-v11',
       tileSize: 512,
 		  zoomOffset: -1
-    }).addTo(mapCity);
+    });
+    tiles.addTo(mapCity);
     this.http.get(this.cities).subscribe((res: any) => {
       for(const c of res.features) {
         const lon = c.geometry.coordinates[0];
@@ -53,8 +53,8 @@ export class MarkerService {
       id: 'mapbox/streets-v11',
       tileSize: 512,
 		  zoomOffset: -1
-    }).addTo(map);
-    // tiles.addTo(map);
+    });
+    tiles.addTo(map);
     function onLocationFound(e: { accuracy: any; latlng: L.LatLngExpression; }) {
       var radius = e.accuracy;
   

@@ -1,72 +1,41 @@
 .texteAcceuil {
     color: #FEDA3C;
     text-align: center;
-    margin: 1% 1%;
+    margin: 0;
+    position: relative;
+    top: 5%;
 }
 
-.map-container {
-    position: absolute;
-    // top: 0;
-    // left: 0;
-    // right: 0;
-    bottom: 0;
-    margin: 30px;
-    margin-top: 5%;
-    margin-left: 23%;
-    height: 60%;
-    width: 55%;
-  }
-  
-  .map-frame {
-    // margin-top: 10%;
-    // margin-bottom: 5%;
-    border: 2px solid black;
-    height: 85%;    
-  }
-  
-  #map {
-    height: 100%;
-    max-width: 100%;
-		max-height: 100%;
-  }
 
 img {
-    width: 100%;
-    max-width: 20%;
-    height: auto;
-    margin-top: 1%;
+    max-width: 15%;
+    max-height: 15%;
+    margin-top: 0;
+    margin-right: 1%;
     margin-bottom: 1%;
 }
 
 .partAcceuil {
-    margin-top: 5%;
-    margin-bottom: 5%;
+  margin-top: 0;
 }
 
-@media (max-width:1200px) {
-    img {
-        width: 100%;
-        max-width: 99%;
-        height: auto;
-        margin-top: 1%;
-        margin-bottom: 1%;
-    }
+@media (max-width:1520px) and (max-height:920px){
+
     .partAcceuil {
         margin-top: 10%;
         margin-bottom: 10%;
     }
 }
 
-@media (max-width:767px) {
+@media (max-width:600px) and (max-height:920px) {
     img {
-        width: 100%;
-        max-width: 99%;
-        height: auto;
-        margin-top: 1%;
+        max-width: 45%;
+        max-height: 45%;
+        margin-top: 0;
         margin-bottom: 1%;
     }
     .partAcceuil {
-        margin-top: 25%;
-        margin-bottom: 25%;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
