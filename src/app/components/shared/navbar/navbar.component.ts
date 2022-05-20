@@ -36,8 +36,9 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.isLoggedIn = false;
     this.tokenStorageService.signOut();
-    this.router.navigateByUrl("");
-
+    this.router.navigateByUrl("").then(() => {
+      window.location.reload();
+    });
   }
 
 }

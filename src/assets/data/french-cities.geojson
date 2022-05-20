@@ -1,0 +1,45 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [ 
+            4.835659,
+            45.764043
+          ]
+        },
+        "properties": {
+          "name": "Lyon"
+        }
+      },
+      
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            2.352222,
+            48.856614
+          ]
+        },
+        "properties": {
+          "name": "Paris"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.057256,
+            50.629250
+          ]
+        },
+        "properties": {
+          "name": "Lille"
+        }
+      }
+    ]
+  }

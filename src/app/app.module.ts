@@ -12,9 +12,11 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './modules/client/pages/login/login.component';
-import { RegisterComponent } from './modules/client/pages/register/register.component';
-import { UserComponent } from './modules/client/pages/user/user.component';
+import { MarkerService } from './services/marker.service';
+import { PopupPanelService } from './services/popup-panel.service';
+import { ClientModule } from './modules/client/client.module';
+import { MapComponent } from './modules/client/components/pages/map/map.component';
+
 
 
 
@@ -24,16 +26,19 @@ import { UserComponent } from './modules/client/pages/user/user.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    NotfoundComponent
+    NotfoundComponent, 
+    MapComponent
+  
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule, 
+    ClientModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, MarkerService, PopupPanelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

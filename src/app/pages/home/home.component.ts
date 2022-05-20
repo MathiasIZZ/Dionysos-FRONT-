@@ -9,11 +9,10 @@ export class HomeComponent implements OnInit {
 
   urlLogo="../../../assets/images/logo.jpg";
 
-  constructor() {
-
-   }
+  constructor() {}
 
   ngOnInit(): void {
+
   }
 
 }

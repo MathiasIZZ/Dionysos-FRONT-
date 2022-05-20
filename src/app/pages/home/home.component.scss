@@ -1,46 +1,41 @@
 .texteAcceuil {
     color: #FEDA3C;
     text-align: center;
-    margin: 1% 1%;
+    margin: 0;
+    position: relative;
+    top: 5%;
 }
 
+
 img {
-    width: 100%;
-    max-width: 20%;
-    height: auto;
-    margin-top: 1%;
+    max-width: 15%;
+    max-height: 15%;
+    margin-top: 0;
+    margin-right: 1%;
     margin-bottom: 1%;
 }
 
 .partAcceuil {
-    margin-top: 5%;
-    margin-bottom: 5%;
+  margin-top: 0;
 }
 
-@media (max-width:1200px) {
-    img {
-        width: 100%;
-        max-width: 99%;
-        height: auto;
-        margin-top: 1%;
-        margin-bottom: 1%;
-    }
+@media (max-width:1520px) and (max-height:920px){
+
     .partAcceuil {
         margin-top: 10%;
         margin-bottom: 10%;
     }
 }
 
-@media (max-width:767px) {
+@media (max-width:600px) and (max-height:920px) {
     img {
-        width: 100%;
-        max-width: 99%;
-        height: auto;
-        margin-top: 1%;
+        max-width: 45%;
+        max-height: 45%;
+        margin-top: 0;
         margin-bottom: 1%;
     }
     .partAcceuil {
-        margin-top: 25%;
-        margin-bottom: 25%;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
