@@ -24,10 +24,14 @@ export class AdminPASSGuard implements CanActivate {
       console.log(JSON.stringify(user));
       this.roles = user.roles;
       this.username = user.username;
-      return true;
-    } else {
-      return false;
+      console.log(this.roles);
+      if(this.roles == ['ROLE_ADMIN']) {
+        console.log("true");
+        return true;
+      }
     }
+    return false;
+    console.log("false");
   }
 
 
