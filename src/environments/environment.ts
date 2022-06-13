@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   AUTH_API:"http://localhost:8080/api/auth/",
-  USER_API:"http://localhost:8080/api/users"
+  TEST_API:"http://localhost:8080/api/test/",
+  USER_API:"http://localhost:8080/users"
 };
 
 /*

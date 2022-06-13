@@ -1,2 +1,17 @@
 <p>admin works!</p>
+<br>
+<p>Route Test : api/test/all </p>
+<p> {{ publicContent }}</p>
+
+
+<div *ngIf="userContent">
+    <p>Route Test : {{ route }} </p>
+    <p> {{ userContent }}</p>
+</div>
+
+<div *ngIf="!userContent">
+    <p>Route Test : {{ route }} </p>
+    <p> {{ errorContent }}</p>  
+</div>
+
 
