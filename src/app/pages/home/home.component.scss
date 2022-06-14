@@ -1,41 +1,180 @@
-.texteAcceuil {
-    color: #FEDA3C;
-    text-align: center;
-    margin: 0;
-    position: relative;
-    top: 5%;
+section{
+  padding:3rem 2rem;
+  max-width: 1200px;
+  margin:0 auto;
+}
+
+.home-bg{
+  background-size: cover;
+  background-position: center;
+}
+
+.home-bg .home{
+  min-height: 70rem;
+  display: flex;
+  align-items: center;
+}
+
+.home-bg .home .content{
+  width: 50rem;
+  text-align: center;
+}
+
+.home-bg .home .content h3{
+  font-size: 6rem;
+  color: black;
+  font-family: 'Merienda One', cursive;
+}
+
+.home-bg .home .content p{
+  padding: 1rem 0;
+  font-size: 1.6rem;
+  color: black;
+  line-height: 2;
+}
+
+.btn{
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: black;
+  cursor: pointer;
+  color: white;
+  font-size: 1.8rem;
+  padding: 1rem 3rem;
+}
+
+.btn:hover{
+  background-color: black;
+}
+
+.about{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap:4rem;
+}
+
+.about .image{
+  flex: 1 1 40rem;
+}
+
+.about .image img{
+  width: 100%;
+}
+
+.about .content{
+  flex: 1 1 40rem;
+}
+
+.about .content h3{
+  font-size: 4.5rem;
+  color: black;
+  font-family: 'Merienda One', cursive;
+  padding-bottom: 1rem;
+}
+
+.about .content p{
+  padding:1rem 0;
+  line-height: 2;
+  color: lightblue;
+  font-size: 1.5rem;
+}
+
+.facility .box-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.facility .box-container .box{
+  text-align: center;
 }
 
 
-img {
-    max-width: 15%;
-    max-height: 15%;
-    margin-top: 0;
-    margin-right: 1%;
-    margin-bottom: 1%;
+.facility .box-container .box img{
+  height: 10rem;
+  margin-bottom: .5rem;
 }
 
-.partAcceuil {
-  margin-top: 0;
+.facility .box-container .box h3{
+  font-size: 2rem;
+  color: black;
+  margin: 1rem 0;
 }
 
-@media (max-width:1520px) and (max-height:920px){
-
-    .partAcceuil {
-        margin-top: 10%;
-        margin-bottom: 10%;
-    }
+.facility .box-container .box p{
+  line-height: 2;
+  font-size: 1.5rem;
+  color: lightblue;
 }
 
-@media (max-width:600px) and (max-height:920px) {
-    img {
-        max-width: 45%;
-        max-height: 45%;
-        margin-top: 0;
-        margin-bottom: 1%;
-    }
-    .partAcceuil {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
+.heading{
+  text-align: center;
+  margin-bottom: 3rem;
 }
+
+.heading img{
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.heading h3{
+  font-size:4rem;
+  color: black;
+  font-family: 'Merienda One', cursive;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//.texteAcceuil {
+//    color: #FEDA3C;
+//    text-align: center;
+//    margin: 0;
+//    position: relative;
+//    top: 5%;
+//}
+//
+//
+//img {
+//    max-width: 15%;
+//    max-height: 15%;
+//    margin-top: 0;
+//    margin-right: 1%;
+//    margin-bottom: 1%;
+//}
+//
+//.partAcceuil {
+//  margin-top: 0;
+//}
+//
+//@media (max-width:1520px) and (max-height:920px){
+//
+//    .partAcceuil {
+//        margin-top: 10%;
+//        margin-bottom: 10%;
+//    }
+//}
+//
+//@media (max-width:600px) and (max-height:920px) {
+//    img {
+//        max-width: 45%;
+//        max-height: 45%;
+//        margin-top: 0;
+//        margin-bottom: 1%;
+//    }
+//    .partAcceuil {
+//        margin-top: 0;
+//        margin-bottom: 0;
+//    }
+//}

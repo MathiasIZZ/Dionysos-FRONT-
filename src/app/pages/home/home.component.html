@@ -1,7 +1,68 @@
-<div class="partAcceuil">
-    <h1 class="texteAcceuil">Bienvenue sur Dionysos</h1>
-    <img [src]="urlLogo" alt="">
-    <ng-container>
-        <app-map></app-map>
-    </ng-container>
+<div class="home-bg" [ngStyle]="{'background' : 'linear-gradient(90deg, white, transparent 70%), url(assets/images/home-bg.jpg)'}">
+
+  <section class="home" id="home">
+
+    <div class="content">
+      <h3>Bienvenue sur DIONYSOS</h3>
+      <p>La première application événementielle collaborative en France</p>
+      <a href="#about" class="btn">En savoir plus</a>
+    </div>
+
+  </section>
+
 </div>
+
+<section class="about" id="about">
+
+  <div class="image">
+    <img src="assets/images/about-img.svg" alt="">
+  </div>
+
+  <div class="content">
+    <h3>Commencer sereinement votre journée</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam suscipit sunt repellendus, dolorum recusandae placeat quae. Iste eaque aspernatur, animi deleniti voluptas, sunt molestias eveniet sint consectetur facere a ex.</p>
+  </div>
+
+</section>
+<section class="facility">
+
+  <div class="heading">
+    <img src="assets/images/heading-img.png" alt="">
+    <h3>Aperçu des événements</h3>
+  </div>
+
+  <div class="box-container">
+
+    <div class="box">
+      <img src="assets/images/icon-1.png" alt="">
+      <h3>Concert amateur</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, adipisci!</p>
+    </div>
+
+    <div class="box">
+      <img src="assets/images/icon-2.png" alt="">
+      <h3>Danse de rue</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, adipisci!</p>
+    </div>
+
+    <div class="box">
+      <img src="assets/images/icon-3.png" alt="">
+      <h3>Thêatre en plein air</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, adipisci!</p>
+    </div>
+
+    <div class="box">
+      <img src="assets/images/icon-4.png" alt="">
+      <h3>Bons plans restau</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, adipisci!</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="facility">
+
+  <app-map></app-map>
+
+</section>
