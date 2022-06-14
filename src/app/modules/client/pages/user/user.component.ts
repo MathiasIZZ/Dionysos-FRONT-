@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs/internal/observable/of';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,28 +9,64 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserComponent implements OnInit {
 
-  content ?: any;
+  content?: any;
+  roles: string[] = [];
+  users?: string[] = [];
 
-  constructor(private userService: UserService) {
-    this.content = this.userService.getUserBoard();
+  constructor(
+    private userService: UserService, 
+    private token: TokenStorageService) {
    }
 
   ngOnInit(): void {
-    // const userObservable = of(this.content);
-    // const userObserver = {
-    //   next: (data: any) => console.log("UserObserver : " + data),
-    //   error: (err: Error) => console.log("USerObserver Error : " + err),
-    //   complete: () => console.log("Observer complete"),
-    // };
-    // userObservable.subscribe(userObserver);
+    this.roles = this.token.getUser().roles;
     
-    this.userService.getUserBoard().subscribe(
-      data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
+    for (let role of this.roles) {  
+      if (role === "ROLE_USER"){
+        this.userService.getUserBoard().subscribe({
+          next: (data) => {
+            this.content = data;
+            console.log('USerBoard : ',this.content);
+          },
+          error: (err) => {
+            this.content = JSON.stringify(err.message);
+          }
+        });
+        break;
+      } 
+      if (role === "ROLE_MODERATOR") {
+        this.userService.getModBoard().subscribe({
+          next: (data) => {
+            this.content = data;
+            console.log('ModBoard : ',this.content);
+          },
+          error: (err) => {
+            this.content = JSON.stringify(err.message);
+          }
+        });
+        break;
       }
-    );
+      if (role === "ROLE_ADMIN") {
+        this.userService.getAdminBoard().subscribe({
+          next: (data) => {
+            this.content = data;
+            console.log('Admin : ',this.content);
+          },
+          error: (err) => {
+            this.content = JSON.stringify(err.message);
+          }
+        });
+        this.userService.findAll().subscribe({
+          next: (data) => {
+            this.users = data;
+            console.log('FindAll USer : ',this.users);
+          },
+          error: (err) => {
+            this.content = JSON.stringify(err.message);
+          }
+        });
+        break;
+      }
+    }
   }
 }
