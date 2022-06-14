@@ -28,4 +28,17 @@ export class AuthService {
       password
     }, httpOptions);
   }
+
+  refreshTokenAuth(token: string) {
+    return this.http.post(`${environment.AUTH_API}` + 'refreshtoken', {
+      refreshToken: token
+    }, httpOptions);
+  }
+
+  // Pas sur que cette méthode soit utile !!
+  refreshTokenTest(token: string) {
+    return this.http.post(`${environment.TEST_API}` + 'refreshtoken', {
+      refreshToken: token
+    }, httpOptions);
+  }
 }

@@ -1,5 +1,9 @@
 <div class="container">
     <header class="jumbotron">
-      <p>{{ content }}</p>
+      <p> {{ content }}</p>
+      <ng-container *ngIf="content ==='Admin Board.'">
+        <p>Liste USERS : {{ users }}  </p>
+      </ng-container>
+     
     </header>
   </div>
