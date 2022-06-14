@@ -1,24 +1,54 @@
-footer {
-    
-    position:fixed;
-    left: 7%;
-    bottom:0;
-    width: 86%;
-    height: 35px;
-    background-color: rgb(197, 194, 194);
-    color: #000;
-    text-align: center;
+section{
+  padding:3rem 2rem;
+  max-width: 1200px;
+  margin:0 auto;
+}
 
+
+.footer .box-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+  gap:1.5rem;
+  align-items: flex-start;
 }
-.py-3 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-.my-4 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+
+.footer .box-container .box{
+  text-align: center;
 }
-// .my-4[_ngcontent-dis-c19] {
-//     margin-top: 1.5rem !important;
-//     margin-bottom: 1.5rem !important;
-//   }
+
+.footer .box-container .box i{
+  font-size: 2.5rem;
+  line-height: 6rem;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.footer .box-container .box h3{
+  margin:1rem 0;
+  font-size: 2rem;
+  color: black;
+}
+
+.footer .box-container .box p{
+  line-height: 2;
+  font-size: 1.6rem;
+  color: lightblue;
+}
+
+.footer .credit{
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: .2rem solid black;
+  font-size: 2rem;
+  color: black;
+  /* padding-bottom: 7rem; */
+}
+
+.footer .credit span{
+  color: black;
+}

@@ -12,8 +12,6 @@
   box-sizing: border-box;
   outline: none; border:none;
   text-decoration: none;
-  text-transform: capitalize;
-
 }
 
 *::selection {
@@ -73,7 +71,7 @@ section{
   margin-left: 2rem;
   font-size: 2rem;
   color: black;
-  font-size: 80%;
+
 }
 
 .header .flex .navbar a:hover {

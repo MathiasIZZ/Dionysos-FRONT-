@@ -16,6 +16,8 @@ import { MarkerService } from './services/marker.service';
 import { PopupPanelService } from './services/popup-panel.service';
 import { ClientModule } from './modules/client/client.module';
 import { MapComponent } from './modules/client/components/pages/map/map.component';
+import {MatIconModule} from "@angular/material/icon";
+
 
 
 
@@ -26,17 +28,18 @@ import { MapComponent } from './modules/client/components/pages/map/map.componen
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    NotfoundComponent, 
+    NotfoundComponent,
     MapComponent
-  
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule, 
-    ClientModule
+    HttpClientModule,
+    ClientModule,
+    MatIconModule
   ],
   providers: [authInterceptorProviders, MarkerService, PopupPanelService],
   bootstrap: [AppComponent]
