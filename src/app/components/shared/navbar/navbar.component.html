@@ -12,7 +12,7 @@
         <a routerLink="/client/register">Inscription</a>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
-        <a routerLink="/client/user">{{ username }}</a>
+        <a routerLink="/client/user">{{ username }} Board</a>
         <a routerLink="/client/profile">{{ username }}</a>
         <a (click)="logout()">Deconnexion</a>
       </ng-container>
