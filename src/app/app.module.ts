@@ -17,6 +17,7 @@ import { PopupPanelService } from './services/popup-panel.service';
 import { ClientModule } from './modules/client/client.module';
 import { MapComponent } from './modules/client/components/pages/map/map.component';
 import {MatIconModule} from "@angular/material/icon";
+import {ToastrModule} from "ngx-toastr";
 
 
 
@@ -39,7 +40,8 @@ import {MatIconModule} from "@angular/material/icon";
     FormsModule,
     HttpClientModule,
     ClientModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot()
   ],
   providers: [authInterceptorProviders, MarkerService, PopupPanelService],
   bootstrap: [AppComponent]

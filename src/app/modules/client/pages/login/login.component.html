@@ -1,122 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-  </symbol>
-  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-  </symbol>
-</svg>
 <div class="container">
-  <h1>DIONYSOS</h1>
-</div>
-<form   
-  *ngIf="!isLoggedIn"
-  name="form"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  #f="ngForm"
-  novalidate
-  >
-  
-  <div class="mb-3"> 
-    <label for="username" class="form-label">Username</label>
-    <div class="bgroundcolor">
-      <input
-        type="text"
-        class="form-control text-center"
-        id="username"
-        name="username"
-        minlength="3"
-        maxlength="20"
-        [(ngModel)]="form.username"
-        required
-        #username="ngModel"/>
-    </div>
-    <div
-    *ngIf="username.errors && f.submitted">
-    <div 
-    class="alert alert-danger alert-dismissible fade show"
-    role="alert"
-    *ngIf="username.errors!['required']">
-    <span>
-      <svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-      Username is required !
-    </span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div
-      class="alert alert-danger alert-dismissible fade show"
-      role="alert"  
-      *ngIf="username.errors['maxlength']">
-      <span>
-        <svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-          Username must be at most 20 characters !
-      </span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div
-      class="alert alert-danger alert-dismissible fade show"
-      role="alert" 
-      *ngIf="username.errors!['minlength']">
-      <span>
-        <svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-          Username must be at least 3 characters !
-      </span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="forms-container">
+    <div class="signin-signup">
+
+      <form
+        action=""
+        class="sign-in-form"
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate>
+        <h2 class="title">Connexion</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input
+            type="text"
+            name="username"
+            minlength="3"
+            maxlength="20"
+            [(ngModel)]="form.username"
+            #username="ngModel"
+            autocomplete="username"
+            placeholder="Pseudo"
+            required>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            autocomplete="current-password"
+            placeholder="Mot de pass"
+            id="id_password"
+            required
+            id="password"
+            name="password"
+            minlength="6"
+            maxlength="40"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel">
+        </div>
+
+        <input type="submit" value="Connexion" class="btn solid">
+
+      </form>
+
     </div>
   </div>
-    <label for="password" class="form-label">Password</label>
-    <div class="bgroundcolor">
-      <input
-        type="password"
-        class="form-control text-center"
-        id="password"
-        name="password"
-        minlength="6"
-        maxlength="40"
-        [(ngModel)]="form.password"
-        required
-        minlength="6"
-        #password="ngModel"/>
-    </div>
-    <div
-      *ngIf="password.errors && f.submitted"
-    >
-    <div class="alert alert-danger alert-dismissible fade show"
-        role="alert" *ngIf="password.errors['required']">
-      <span>
-      <svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-        Password is required !
-      </span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-      <div class="alert alert-danger alert-dismissible fade show"
-          role="alert" *ngIf="password.errors['minlength']">
-          <span>
-            <svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-              Password must be at least 6 characters !
-        </span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>Vous n'avez pas encore de compte ?</h3>
+        <p>Créer votre compte dès maintenant pour avoir accès a 100% du contenu de DIONYSOS</p>
+        <button class="btn transparent" id="sign-up-btn">S'enregistrer</button>
       </div>
+      <img src="img/log.svg" class="image" alt="">
     </div>
-  </div>
-  <button type="submit" class="btn btn-mystyle">Connexion</button>
-  <div
-    class="alert alert-danger alert-dismissible fade show"
-    role="alert"
-    id="fail"
-    *ngIf="f.submitted && isLoginFailed"
-    >
-    <span>
-      <svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-      Login failed: {{ errorMessage }}
-    </span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-</form>
-<div class="mb-3">
-  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isLoggedIn">
-    Bonjour {{ username }} connexion en tant que {{ roles }}.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="goToProfile()"></button>
+
   </div>
 </div>
 
