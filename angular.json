@@ -45,8 +45,7 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "assets/scripts/"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
