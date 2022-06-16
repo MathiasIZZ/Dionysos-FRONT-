@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
           timeOut: 3000,
           progressBar: true
         });
+        setTimeout(this.goToHome, 2000)
       },
       error: (err) => {
         this.errorMessage = err.message;
@@ -63,8 +64,7 @@ export class LoginComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
-
-  goToProfile(): void {
+  goToHome(): void {
     window.location.assign("");
   }
 

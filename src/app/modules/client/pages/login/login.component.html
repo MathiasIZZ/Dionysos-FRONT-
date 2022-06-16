@@ -41,7 +41,7 @@
             minlength="6"
             #password="ngModel">
         </div>
-
+        <ng-container *ngIf="!f.form.valid"><p>Vos informations ne sont pas conformes</p></ng-container>
         <input type="submit" value="Connexion" class="btn solid">
 
       </form>
@@ -53,9 +53,9 @@
       <div class="content">
         <h3>Vous n'avez pas encore de compte ?</h3>
         <p>Créer votre compte dès maintenant pour avoir accès a 100% du contenu de DIONYSOS</p>
-        <button class="btn transparent" id="sign-up-btn">S'enregistrer</button>
+        <button class="btn transparent" routerLink="/client/register" id="sign-up-btn">S'enregistrer</button>
       </div>
-      <img src="img/log.svg" class="image" alt="">
+<!--      <img src="assets/images/logo.jpg" class="image" alt="">-->
     </div>
 
   </div>
