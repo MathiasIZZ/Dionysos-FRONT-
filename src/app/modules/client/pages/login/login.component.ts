@@ -68,6 +68,10 @@ export class LoginComponent implements OnInit {
     window.location.assign("");
   }
 
+  goToRegister(): void {
+    window.location.assign("/client/register");
+  }
+
   verifToken(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;

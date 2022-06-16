@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from 'src/app/components/shared/navbar/navbar.component';
 import { AppComponent } from 'src/app/app.component';
 import { MapComponent } from './components/pages/map/map.component';
+import { ListEventComponent } from './components/pages/list-event/list-event.component';
 
 
 
@@ -28,7 +29,9 @@ import { MapComponent } from './components/pages/map/map.component';
     RegisterComponent,
     LoginComponent,
     EditEventComponent,
-    EditPanelComponent
+    EditPanelComponent,
+    ListEventComponent
+
   ],
   imports: [
     CommonModule,

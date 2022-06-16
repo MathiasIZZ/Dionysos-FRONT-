@@ -1,1 +1,101 @@
-<p>edit-event works!</p>
+<div class="container">
+    <div class="forms-container">
+      <div class="event">
+  
+        <form
+          class="event-form"
+          name="form"
+          [formGroup]="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate>
+         
+          <div class="input-field">
+            <!-- <i class="fas fa-user"></i> 
+             [(ngModel)]="form.eventTitle | date:'yyyy-MM-ddTHH:mm'"
+             #eventTitle="ngModel"
+            -->
+            <input
+              type="text"
+              name="eventTitle"
+              formControlName="eventTitle"
+              autocomplete="eventTitle"
+              placeholder="Titre de l'événement"
+              required>
+          </div>
+          <div class="input-field">
+            <!-- <i class="fas fa-user"></i> 
+                      [(ngModel)]="form.city"
+              #city="ngModel"
+            -->
+            <input
+              type="text"
+              name="city"
+              formControlName="city"
+              autocomplete="city"
+              placeholder="Ville "
+              required>
+          </div>
+          <div class="input-field">
+            <!-- <i class="fas fa-user"></i> 
+                [(ngModel)]="form.hourBegin"
+                #hourBegin="ngModel"
+            -->
+            <label for="hourBegin">Date et heure début 
+                <input
+                type="datetime-local"
+                name="hourBegin"
+                formControlName="hourBegin"
+                autocomplete="hourBegin"
+                placeholder="Date et heure début "
+                required>
+            </label>
+
+          </div>
+          <div class="input-field">
+            <!-- <i class="fas fa-user"></i> 
+                [(ngModel)]="form.hourEnd"
+                #hourEnd="ngModel"
+            -->
+            <label for="hourEnd">Date et heure fin 
+                <input
+                type="datetime-local"
+                name="hourEnd"
+                formControlName="hourEnd"
+                autocomplete="hourEnd"
+                placeholder="Date et heure fin "
+                required>
+            </label>
+
+          </div>
+          <div class="input-field">
+            <!-- <i class="fas fa-user"></i>
+              [(ngModel)]="form.description"
+              #description="ngModel"
+            -->
+            <input
+              type="text"
+              name="description"
+              formControlName="description"
+              autocomplete="description"
+              placeholder="Description "
+              required>
+          </div>
+  
+          <input type="submit" value="Ajouter Event" class="btn solid">
+  
+        </form>
+  
+      </div>
+    </div>
+    <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h2 class="title">AJOUTER UN EVENEMENT </h2>
+          </div>
+        </div>
+    
+      </div>
+  </div>
+  
+  
