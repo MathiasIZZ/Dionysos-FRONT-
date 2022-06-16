@@ -1,1 +1,45 @@
-<p>list-event works!</p>
+<section class="facility">
+
+    <div class="heading">
+      <h3>Aperçu des événements</h3>
+    </div>
+  
+    <div class="box-container">
+  
+        <ng-container *ngFor="let event of events">
+            <div class="box">
+                <img src="assets/images/icon-1.png" alt="">
+                <h3> {{ event.eventTitle }}</h3>
+                <p> Description : {{ event.description }} </p> 
+                <p> Ville :  {{ event.city }} </p> 
+                <p> Date et heure début :  {{ event.hourBegin | date: 'dd-MM-yyyy HH:mm'}} </p> 
+
+              </div>
+        </ng-container>
+    
+      <div class="box">
+        <img src="assets/images/icon-3.png" alt="">
+        <h3>Thêatre en plein air</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, adipisci!</p>
+      </div>
+  
+      <div class="box">
+        <img src="assets/images/icon-4.png" alt="">
+        <h3>Bons plans restau</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, adipisci!</p>
+      </div>      
+    </div>
+    <div class="box-container">
+        <div class="box">
+            <button class="btn solid" (click)="addEvent()">Ajouter un Evénement</button>
+          </div>
+    
+    </div>
+  
+  </section>
+
+  <!-- <section class="facility">
+
+    <app-map></app-map>
+  
+  </section> -->
