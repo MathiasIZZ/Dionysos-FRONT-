@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { MarkerService } from 'src/app/services/marker.service';
 import * as L from 'leaflet';

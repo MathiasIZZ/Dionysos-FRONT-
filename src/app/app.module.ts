@@ -15,9 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MarkerService } from './services/marker.service';
 import { PopupPanelService } from './services/popup-panel.service';
 import { ClientModule } from './modules/client/client.module';
-import { MapComponent } from './modules/client/components/pages/map/map.component';
+
 import {MatIconModule} from "@angular/material/icon";
 import {ToastrModule} from "ngx-toastr";
+import { MapComponent } from './components/shared/map/map.component';
 
 
 

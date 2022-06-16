@@ -12,11 +12,8 @@ import { EditPanelComponent } from './components/shared/edit-panel/edit-panel.co
 import { ClientRoutingModule } from './client-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavbarComponent } from 'src/app/components/shared/navbar/navbar.component';
-import { AppComponent } from 'src/app/app.component';
-import { MapComponent } from './components/pages/map/map.component';
 import { ListEventComponent } from './components/pages/list-event/list-event.component';
-
+import { MapComponent } from 'src/app/components/shared/map/map.component';
 
 
 @NgModule({
@@ -31,7 +28,7 @@ import { ListEventComponent } from './components/pages/list-event/list-event.com
     EditEventComponent,
     EditPanelComponent,
     ListEventComponent
-
+    
   ],
   imports: [
     CommonModule,
