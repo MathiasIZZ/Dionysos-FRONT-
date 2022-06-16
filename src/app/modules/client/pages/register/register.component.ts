@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import {ToastrService} from "ngx-toastr";
+
 
 @Component({
   selector: 'app-register',
@@ -27,13 +27,22 @@ export class RegisterComponent implements OnInit {
     const { username, email, password } = this.form;
     this.authService.register(username, email, password).subscribe({
       next: (data) => {
-        console.log("data : " + data);
+        console.log("data : " + data.username + data.email + data.password);
         this.isSignup = true;
         this.isSignupFailed = false;
+        this.toastr.success("", "Enregistrement réussi !", {
+          progressBar: true,
+          timeOut: 3000
+        });
+      setTimeout(this.goToHome, 1000)
       },
       error: (err) => {
         this.errorMessage = err.error.message;
         this.isSignupFailed  = true;
+        this.toastr.error("", "Erreur lors de votre enregistrement", {
+          progressBar: true,
+          timeOut: 3000
+        })
       }
     });
   }
@@ -43,7 +52,7 @@ export class RegisterComponent implements OnInit {
   }
 
   goToHome() {
-    window.location.assign("");
+    window.location.assign("/client/login");
   }
 
 }
