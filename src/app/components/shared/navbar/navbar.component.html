@@ -1,14 +1,19 @@
 <header class="header">
 
-  <section class="flex">
+  <section class="flex" *ngIf="nav.visible">
     <a href="#home" class="logo"><img src="assets/images/logo.png" alt=""></a>
     <nav class="navbar">
-      <a href="#home"></a>
-      <a href="#about">about</a>
+      <a routerLink="">Accueil</a>
+      <a href="#about">A propos</a>
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/client/register">Inscription</a>
+        <a routerLink="/client/login">Se connecter</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <a>{{ username }}</a>
+        <a (click)="logout()">Déconnexion</a>
+      </ng-container>
       <a routerLink="admin">Admin</a>
-      <a href="#gallery">gallery</a>
-      <a href="#team">team</a>
-      <a href="#contact">contact</a>
     </nav>
     <div id="menu-btn" class="fas fa-bars"></div>
   </section>

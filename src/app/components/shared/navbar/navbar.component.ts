@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
       this.username = user.username;
       console.log("NavBar, username : " + user.username)
     }
-  }  
+  }
 
   logout(): void {
     this.isLoggedIn = false;

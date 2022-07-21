@@ -1,46 +1,367 @@
-.texteAcceuil {
-    color: #FEDA3C;
-    text-align: center;
-    margin: 1% 1%;
+@import url('https://fonts.googleapis.com/css2?family=Merienda+One&family=Nunito:wght@200;300;400;500;600&display=swap');
+
+*{
+  font-family: 'Nunito', sans-serif;
+  margin:0; padding:0;
+  box-sizing: border-box;
+  outline: none; border:none;
+  text-decoration: none;
+
 }
 
-img {
+*::selection{
+  background-color: lightblue;
+  color: white;
+}
+
+
+::-webkit-scrollbar{
+  height: .5rem;
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: purple;
+}
+
+html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+
+section{
+  padding:3rem 2rem;
+  max-width: 1200px;
+  margin:0 auto;
+}
+
+.btn{
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: lightgray;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  padding:1rem 3rem;
+}
+
+.btn:hover{
+  background-color: black;
+}
+
+
+.home-bg{
+  background:linear-gradient(90deg, #b22918, transparent 70%);
+  background-size: cover;
+  background-position: center;
+}
+
+.home-bg .home{
+  min-height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-bg .home .content{
+  width: 50rem;
+  text-align: center;
+}
+
+.home-bg .home .content h3{
+  font-size: 5rem;
+  color: white;
+  font-family: 'Merienda One', cursive;
+}
+
+.home-bg .home .content p{
+  padding:1rem 0;
+  font-size: 1.3rem;
+  color: black;
+  line-height: 2;
+}
+
+.about{
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.about .image{
+  flex:1 1 40rem;
+}
+
+.about .image img{
+  width: 100%;
+}
+
+.about .content{
+  flex:1 1 40rem;
+}
+
+.about .content h3{
+  font-size: 3rem;
+  color: lightblue;
+  font-family: 'Merienda One', cursive;
+  padding-bottom: 1rem;
+}
+
+.about .content p {
+  padding:1rem 0;
+  line-height: 2;
+  color: lightblue;
+  font-size: 1.2rem;
+}
+
+.facility .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+  gap:1.5rem;
+  align-items: flex-start;
+  margin-top: 10%;
+}
+
+.facility .heading h3 {
+  font-family: 'Merienda One', cursive;
+  font-size: 2.5rem;
+}
+
+.facility .box-container .box {
+  text-align: center;
+}
+
+
+.facility .box-container .box img {
+  height: 10rem;
+  margin-bottom: .5rem;
+}
+
+.facility .box-container .box h3 {
+  font-size: 2rem;
+  color: #af8c2e;
+  margin: 1rem 0;
+}
+
+.facility .box-container .box p{
+  line-height: 2;
+  font-size: 1.5rem;
+  color: black;
+}
+
+.menu .box-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 30rem);
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 10%;
+
+}
+
+.menu .box-container .box{
+  text-align: center;
+}
+
+.menu .box-container .box img{
+  width: 60%;
+  margin-bottom: 1rem;
+}
+
+.menu .box-container .box h3{
+  font-size: 2rem;
+  color: black;
+}
+
+
+
+.contact .row{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap:2rem;
+}
+
+.contact .row .image{
+  flex:1 1 50rem;
+}
+
+.contact .row .image img{
+  width: 100%;
+}
+
+.contact .row form{
+  flex:1 1 30rem;
+  border: .2rem solid black;
+  padding:2rem;
+  text-align: center;
+}
+
+.contact .row form h3{
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.contact .row form .box{
+  width: 100%;
+  padding:1.4rem;
+  font-size: 1.8rem;
+  color: black;
+  border: .2rem solid black;
+  margin:1rem 0;
+}
+
+
+
+
+@media (max-width:991px){
+
+  html{
+    font-size: 55%;
+  }
+
+  .about .image img{
+    width: 150%;
+  }
+
+}
+
+@media (max-width:768px){
+
+  #menu-btn{
+    display: inline-block;
+    transition: .2s linear;
+  }
+
+  #menu-btn.fa-times{
+    transform: rotate(180deg);
+  }
+
+  .header .flex .navbar{
+    position: absolute;
+    top:99%; left:0; right:0;
+    background-color: var(--white);
+    border-top: var(--border);
+    border-bottom: var(--border);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: .2s linear;
+  }
+
+  .header .flex .navbar.active{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .header .flex .navbar a{
+    display: block;
+    margin:2rem;
+  }
+
+  .home-bg{
+    background-position: left;
+  }
+
+  .home-bg .home{
+    justify-content: center;
+  }
+
+  .home-bg .home .content h3{
+    font-size: 4rem;
+  }
+
+  .about .content h3{
+    font-size: 2rem;
+  }
+
+  .about{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4rem;
+  }
+
+  .about .image img{
     width: 100%;
-    max-width: 20%;
-    height: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
+  }
+
+
 }
 
-.partAcceuil {
-    margin-top: 5%;
-    margin-bottom: 5%;
+
+
+@media (max-width:450px){
+
+  html{
+    font-size: 50%;
+  }
+
+  .heading img{
+    height: 3rem;
+  }
+
+  .heading h3{
+    font-size: 3rem;
+  }
+
 }
 
-@media (max-width:1200px) {
-    img {
-        width: 100%;
-        max-width: 99%;
-        height: auto;
-        margin-top: 1%;
-        margin-bottom: 1%;
-    }
-    .partAcceuil {
-        margin-top: 10%;
-        margin-bottom: 10%;
-    }
-}
 
-@media (max-width:767px) {
-    img {
-        width: 100%;
-        max-width: 99%;
-        height: auto;
-        margin-top: 1%;
-        margin-bottom: 1%;
-    }
-    .partAcceuil {
-        margin-top: 25%;
-        margin-bottom: 25%;
-    }
-}
+
+
+
+
+
+
+
+
+//.texteAcceuil {
+//    color: #FEDA3C;
+//    text-align: center;
+//    margin: 1% 1%;
+//}
+//
+//img {
+//    width: 100%;
+//    max-width: 20%;
+//    height: auto;
+//    margin-top: 1%;
+//    margin-bottom: 1%;
+//}
+//
+//.partAcceuil {
+//    margin-top: 5%;
+//    margin-bottom: 5%;
+//}
+//
+//@media (max-width:1200px) {
+//    img {
+//        width: 100%;
+//        max-width: 99%;
+//        height: auto;
+//        margin-top: 1%;
+//        margin-bottom: 1%;
+//    }
+//    .partAcceuil {
+//        margin-top: 10%;
+//        margin-bottom: 10%;
+//    }
+//}
+//
+//@media (max-width:767px) {
+//    img {
+//        width: 100%;
+//        max-width: 99%;
+//        height: auto;
+//        margin-top: 1%;
+//        margin-bottom: 1%;
+//    }
+//    .partAcceuil {
+//        margin-top: 25%;
+//        margin-bottom: 25%;
+//    }
+//}
