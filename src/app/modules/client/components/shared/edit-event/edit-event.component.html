@@ -1,7 +1,7 @@
 <div class="container">
     <div class="forms-container">
       <div class="event">
-  
+
         <form
           class="event-form"
           name="form"
@@ -9,10 +9,10 @@
           (ngSubmit)="f.form.valid && onSubmit()"
           #f="ngForm"
           novalidate>
-         
+
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
-             [(ngModel)]="form.eventTitle | date:'yyyy-MM-ddTHH:mm'"
+
+            <!--  [(ngModel)]="form.eventTitle | date:'yyyy-MM-ddTHH:mm'"
              #eventTitle="ngModel"
             -->
             <input
@@ -24,8 +24,8 @@
               required>
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
-                      [(ngModel)]="form.city"
+
+                      <!-- [(ngModel)]="form.city"
               #city="ngModel"
             -->
             <input
@@ -37,11 +37,11 @@
               required>
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
-                [(ngModel)]="form.hourBegin"
+
+                <!--[(ngModel)]="form.hourBegin"
                 #hourBegin="ngModel"
             -->
-            <label for="hourBegin">Date et heure début 
+
                 <input
                 type="datetime-local"
                 name="hourBegin"
@@ -49,15 +49,13 @@
                 autocomplete="hourBegin"
                 placeholder="Date et heure début "
                 required>
-            </label>
 
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
+            <!-- <i class="fas fa-user"></i>
                 [(ngModel)]="form.hourEnd"
                 #hourEnd="ngModel"
             -->
-            <label for="hourEnd">Date et heure fin 
                 <input
                 type="datetime-local"
                 name="hourEnd"
@@ -65,12 +63,11 @@
                 autocomplete="hourEnd"
                 placeholder="Date et heure fin "
                 required>
-            </label>
 
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i>
-              [(ngModel)]="form.description"
+
+              <!--[(ngModel)]="form.description"
               #description="ngModel"
             -->
             <input
@@ -79,13 +76,15 @@
               formControlName="description"
               autocomplete="description"
               placeholder="Description "
+              maxLength="150"
+              height="150px"
               required>
           </div>
-  
-          <input type="submit" value="Ajouter Event" class="btn solid">
-  
+
+          <input type="submit" value="Créer votre panneau" class="btn solid">
+
         </form>
-  
+
       </div>
     </div>
     <div class="panels-container">
@@ -94,8 +93,7 @@
             <h2 class="title">AJOUTER UN EVENEMENT </h2>
           </div>
         </div>
-    
+
       </div>
   </div>
-  
-  
+
