@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Event } from 'src/app/models/event.entity';
 import { EventService } from 'src/app/services/event.service';
+import { User } from "../../../../../models/user.entity";
+import { TokenStorageService } from "../../../../../auth/token-storage.service";
 
 @Component({
   selector: 'app-edit-event',
@@ -13,9 +15,9 @@ export class EditEventComponent implements OnInit {
 
   // form: EventDTO = {
   //   eventTitle: "",
-  //   city: "", 
+  //   city: "",
   //   hourBegin: new Date,
-  //   hourEnd: new Date, 
+  //   hourEnd: new Date,
   //   description: "",
   //   isAlive: true
 
@@ -23,32 +25,48 @@ export class EditEventComponent implements OnInit {
 
   form = this.fb.group({
     eventTitle: "",
-    city: "", 
+    city: "",
     hourBegin: "",
-    hourEnd: "", 
+    hourEnd: "",
     description: "",
     isAlive: true
   });
 
+  currentUserId!: string;
   event?: Event;
   errorMessage?: string;
   hourBegin!: Date;
+  hourEnd!: Date;
 
 
-  constructor(private eventService: EventService, 
-      private toastr: ToastrService,
-      private fb: FormBuilder,) { }
+  constructor(private eventService: EventService, private toastr: ToastrService, private fb: FormBuilder, private tokenStorageService: TokenStorageService) {
+
+  }
 
   ngOnInit(): void {
+    this.getCurrentUserId();
+
   }
+
+  getCurrentUserId(): any{
+    const user = this.tokenStorageService.getUser();
+
+    if (user) {
+      this.currentUserId = JSON.stringify(user.id)
+
+      console.log("top: " + this.currentUserId)
+      return this.currentUserId;
+    }
+  }
+
 
   onSubmit(): void {
 
     this.form = this.fb.group({
       eventTitle: this.form.get('eventTitle')?.value,
-      city: this.form.get('city')?.value, 
+      city: this.form.get('city')?.value,
       hourBegin: this.form.get('hourBegin')?.value.toString().replace("T"," "),
-      hourEnd: this.form.get('hourEnd')?.value.toString().replace("T"," "), 
+      hourEnd: this.form.get('hourEnd')?.value.toString().replace("T"," "),
       description: this.form.get('description')?.value,
       isAlive: true
     });
@@ -58,9 +76,10 @@ export class EditEventComponent implements OnInit {
     // this.form.get('hourBegin')?.value.toString().replace("T"," ");
     // this.form.get('hourBegin')?.value.toString().replace("T"," ");
     this.hourBegin = this.form.get('hourBegin')?.value;
-   
+    this.hourEnd = this.form.get('hourEnd')?.value;
+
     console.log("Vérif Format date debut : " + this.form.get('hourBegin')?.value);
-    console.log("Vérif Format date debut : " + this.form.get('hourBegin')?.value);
+    console.log("Vérif Format date de fin : " + this.form.get('hourEnd')?.value);
     console.log("Vérif hourBegin : " + this.hourBegin);
     // this.eventService.save(this.event!).subscribe({
     // this.eventService.save(this.form.value).subscribe({
@@ -69,6 +88,7 @@ export class EditEventComponent implements OnInit {
       next: () => {
         // this.event = data;
         // this.form = data;
+
         console.log("data added : " + this.form.value);
         this.toastr.success("Ajout ok", 'Evénement ajouter avec succès', {
           timeOut: 3000,

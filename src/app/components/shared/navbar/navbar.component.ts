@@ -26,12 +26,12 @@ export class NavbarComponent implements OnInit {
 
     if(this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      console.log("NavBar, user : " + JSON.stringify(user))
+      console.log("1- NavBar, user : " + JSON.stringify(user))
       this.roles = user.roles;
       this.username = user.username;
-      console.log("NavBar, username : " + user.username)
+      console.log("2- NavBar, username : " + user.username)
     }
-  }  
+  }
 
   logout(): void {
     this.isLoggedIn = false;

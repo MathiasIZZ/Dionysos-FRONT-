@@ -7,10 +7,10 @@
     <nav class="navbar">
       <a href="#home">Home</a>
       <a routerLink="admin">Admin</a>
+      <a routerLink="/client/event">Evénements</a>
       <ng-container *ngIf="!isLoggedIn">
         <a routerLink="/client/login">Connexion</a>
         <a routerLink="/client/register">Inscription</a>
-        <a routerLink="/client/event">Evénements</a>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
         <a routerLink="/client/user">{{ username }} Board</a>
