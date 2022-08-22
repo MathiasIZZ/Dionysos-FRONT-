@@ -1,17 +1,31 @@
-<p>admin works!</p>
-<br>
-<p>Route Test : api/test/all </p>
-<p> {{ publicContent }}</p>
+<section class="facility">
+
+  <div class="heading">
+    <h3>Bienvenue dans l'admin board</h3>
+  </div>
+
+  <div class="box-container">
 
 
-<div *ngIf="userContent">
-    <p>Route Test : {{ route }} </p>
-    <p> {{ userContent }}</p>
-</div>
+    <ng-container *ngFor="let event of events">
+      <div class="box">
+        <h3> {{ event.eventTitle }}</h3>
+        <p> Description : {{ event.description }} </p>
+        <p> Ville :  {{ event.city }} </p>
+        <p> Date et heure début :  {{ event.hourBegin | date: 'dd-MM-yyyy HH:mm'}} </p>
+      </div>
+    </ng-container>
+  <div class="box-container">
+    <div class="box">
+      <button class="btn solid">Ajouter un Evénement</button>
+    </div>
 
-<div *ngIf="!userContent">
-    <p>Route Test : {{ route }} </p>
-    <p> {{ errorContent }}</p>  
-</div>
+  </div>
+  </div>
+</section>
 
+<!-- <section class="facility">
 
+  <app-map></app-map>
+
+</section> -->

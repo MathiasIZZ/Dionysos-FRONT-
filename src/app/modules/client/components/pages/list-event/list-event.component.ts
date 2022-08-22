@@ -14,8 +14,6 @@ export class ListEventComponent implements OnInit {
   events: Event[] = [];
   errorMessage?: string;
 
-  // SI on veut gérer l'ajout d'un event pour un user connecté, faudra passer par le tokerStorageService
-  // constructor(private eventService: EventService, private token: TokenStorageService) { }
   constructor(private eventService: EventService, private token: TokenStorageService, private toastr: ToastrService) { }
 
   ngOnInit(): void {

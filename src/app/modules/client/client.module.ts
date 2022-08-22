@@ -16,6 +16,7 @@ import { NavbarComponent } from 'src/app/components/shared/navbar/navbar.compone
 import { AppComponent } from 'src/app/app.component';
 import { MapComponent } from './components/pages/map/map.component';
 import { ListEventComponent } from './components/pages/list-event/list-event.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -38,7 +39,8 @@ import { ListEventComponent } from './components/pages/list-event/list-event.com
     ClientRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ]
 })
 export class ClientModule { }
