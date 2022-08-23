@@ -17,7 +17,7 @@ export class MarkerService {
     private http: HttpClient,
     private popupService: PopupPanelService) { }
 
-  makeCityMarkers(mapCity: L.Map): void{
+  makeCityMarkers(mapCity: L.Map): any{
     mapCity = L.map('map').setView([46.227638, 2.213749], 6);
     const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
@@ -151,5 +151,38 @@ export class MarkerService {
     //     observer.error();
     //   }
     // })
+  }
+  postCurrentPositionEventMarker(map: L.Map): any {
+    // Affiche par défaut la carte de la France
+    // Après Autorisation: géolocalisation 
+    map = L.map('map').setView([46.227638, 2.213749], 6);
+    const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 18,
+      minZoom: 5,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,' +
+			' © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+		  zoomOffset: -1
+    });
+    // tiles.bindPopup(this.popupService.makeEventPopup());
+    tiles.addTo(map);
+    function onLocationFound(e: { accuracy: any; latlng: L.LatLngExpression; }) {
+      var radius = e.accuracy;
+  
+      L.marker(e.latlng).addTo(map)
+          .bindPopup("You are within " + radius + " meters from this point").openPopup();
+          
+      L.circle(e.latlng, radius).addTo(map);
+      console.log(e.latlng);
+    }
+    function onLocationError(e: { message: any; }) {
+      alert(e.message);
+    }
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    map.locate({setView: true, maxZoom: 16});
   }
 }

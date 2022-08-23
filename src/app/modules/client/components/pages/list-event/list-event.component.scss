@@ -62,3 +62,23 @@
     font-size: 0.8rem;
   }
   
+  .map-container {
+
+    bottom: 0;
+    margin-top: 2%;
+    margin-left: 18%;
+    height: 350px;
+    width: 65%;
+  }
+
+.map-frame {
+    border: 2px solid #FEDA3C;
+    height: 88%;
+    margin-top: 1%;
+}
+
+#map {
+    height: 100%;
+    max-width: 100%;
+	  max-height: 100%;
+}
