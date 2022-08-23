@@ -13,7 +13,12 @@ import { ClientRoutingModule } from './client-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListEventComponent } from './components/pages/list-event/list-event.component';
+
 import { MapComponent } from 'src/app/components/shared/map/map.component';
+
+import {MatIconModule} from "@angular/material/icon";
+
+
 
 
 @NgModule({
@@ -28,14 +33,15 @@ import { MapComponent } from 'src/app/components/shared/map/map.component';
     EditEventComponent,
     EditPanelComponent,
     ListEventComponent
-    
+
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ]
 })
 export class ClientModule { }

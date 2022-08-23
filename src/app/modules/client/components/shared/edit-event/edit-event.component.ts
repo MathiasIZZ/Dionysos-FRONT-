@@ -8,6 +8,11 @@ import { EventService } from 'src/app/services/event.service';
 import { MarkerService } from 'src/app/services/marker.service';
 import { PopupPanelService } from 'src/app/services/popup-panel.service';
 
+import {Category} from "../../../../../models/Category.entity";
+import {CategoryService} from "../../../../../services/category.service";
+import {TokenStorageService} from "../../../../../auth/token-storage.service";
+
+
 @Component({
   selector: 'app-edit-event',
   templateUrl: './edit-event.component.html',
@@ -15,40 +20,50 @@ import { PopupPanelService } from 'src/app/services/popup-panel.service';
 })
 export class EditEventComponent implements OnInit {
 
-  // form: EventDTO = {
-  //   eventTitle: "",
-  //   city: "", 
-  //   hourBegin: new Date,
-  //   hourEnd: new Date, 
-  //   description: "",
-  //   isAlive: true
-
-  // };
 
 
   map?: any;
   cities: string = '/assets/data/french-cities.geojson';
   form = this.fb.group({
     eventTitle: "",
-    city: "", 
+    city: "",
     hourBegin: "",
-    hourEnd: "", 
+    hourEnd: "",
+    createdAt: new Date(),
+    category: "",
     description: "",
-    isAlive: true
+    isAlive: true,
+    author: String
   });
+
+  authorId?: String;
 
   event?: Event;
   errorMessage?: string;
   hourBegin!: Date;
+
   events: Event[] = [];
 
-  constructor(private eventService: EventService, 
+  categories: Category[] = [];
+
+
+
+  constructor(private eventService: EventService,
+      private cateoryService: CategoryService,
       private toastr: ToastrService,
       private fb: FormBuilder,
       private http: HttpClient,
-      private popupService: PopupPanelService) { }
+      private popupService: PopupPanelService,
+      private tokenStorageService: TokenStorageService) { }
+
+
 
   ngOnInit(): void {
+    this.getAllCategories();
+
+    const user = this.tokenStorageService.getUser();
+    this.authorId = user.id;
+
 
   }
 
@@ -56,29 +71,20 @@ export class EditEventComponent implements OnInit {
 
     this.form = this.fb.group({
       eventTitle: this.form.get('eventTitle')?.value,
-      city: this.form.get('city')?.value, 
+      city: this.form.get('city')?.value,
       hourBegin: this.form.get('hourBegin')?.value.toString().replace("T"," "),
-      hourEnd: this.form.get('hourEnd')?.value.toString().replace("T"," "), 
+      hourEnd: this.form.get('hourEnd')?.value.toString().replace("T"," "),
+      createdAt: new Date(),
+      category: this.form.get('category')?.value,
       description: this.form.get('description')?.value,
-      isAlive: true
+      isAlive: true,
+      authorId: this.authorId
     });
 
-    // this.form.patchValue(this.form.get('hourBegin')?.value.toString().replace("T"," "));
-    // this.form.patchValue(this.form.get('hourBegin')?.value.toString().replace("T"," "));
-    // this.form.get('hourBegin')?.value.toString().replace("T"," ");
-    // this.form.get('hourBegin')?.value.toString().replace("T"," ");
-    this.hourBegin = this.form.get('hourBegin')?.value;
-   
-    console.log("Vérif Format date debut : " + this.form.get('hourBegin')?.value);
-    console.log("Vérif Format date debut : " + this.form.get('hourBegin')?.value);
-    console.log("Vérif hourBegin : " + this.hourBegin);
-    // this.eventService.save(this.event!).subscribe({
-    // this.eventService.save(this.form.value).subscribe({
+    console.log(this.form.value);
 
     this.eventService.save(this.form.value).subscribe({
       next: () => {
-        // this.event = data;
-        // this.form = data;
         console.log("data added : " + this.form.value);
         this.toastr.success("Ajout ok", 'Evénement ajouter avec succès', {
           timeOut: 3000,
@@ -89,12 +95,12 @@ export class EditEventComponent implements OnInit {
       error: (err) => {
         this.errorMessage = err.message;
         console.log("add event failed")
-        this.toastr.error(this.errorMessage , 'Echec de l\'ajout d\'événement', {
+        this.toastr.error(this.errorMessage , 'Echec de l\'ajout de l\'événement', {
           timeOut: 3000,
           progressBar: true
         });
       }
-      
+
     });
   }
   makeEventMarkers(map: L.Map): any{
@@ -128,12 +134,12 @@ export class EditEventComponent implements OnInit {
   }
 
   getAllEvents() {
-    
+
     this.eventService.findAll().subscribe({
       next: (data) => {
         this.events = data;
         console.log('LIST Events : ', this.events.toString);
-        
+
       },
       error: (err) => {
         this.errorMessage = err.message;
@@ -144,10 +150,29 @@ export class EditEventComponent implements OnInit {
         });
       }
     });
+
+
+
+  }
+
+
+
+
+  getAllCategories() {
+    this.cateoryService.findAll().subscribe( {
+      next: (data) => {
+        this.categories = data;
+        console.log('List des catégories:', this.categories);
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+        console.log("La liste des catégories n'a pas pu être récupérée");
+      }
+    })
   }
   // postCurrentPositionEventMarker(map: L.Map): any {
   //   // Affiche par défaut la carte de la France
-  //   // Après Autorisation: géolocalisation 
+  //   // Après Autorisation: géolocalisation
   //   map = L.map('map').setView([46.227638, 2.213749], 6);
   //   const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
   //     maxZoom: 18,
@@ -166,7 +191,7 @@ export class EditEventComponent implements OnInit {
   //     //     .bindPopup("You are within " + radius + " meters from this point").openPopup();
   //     // L.marker(e.latlng).bindPopup(this.popupService.makeEventPopup(this.form.value)).openPopup();
   //     L.marker(e.latlng).addTo(map);
-          
+
   //     L.circle(e.latlng, radius).addTo(map);
   //     console.log(e.latlng);
   //   }

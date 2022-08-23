@@ -21,11 +21,15 @@ export class ListEventComponent implements OnInit {
   
   errorMessage?: string;
 
+<<<<<<< HEAD
   // SI on veut gérer l'ajout d'un event pour un user connecté, faudra passer par le tokerStorageService
   // constructor(private eventService: EventService, private token: TokenStorageService) { }
   constructor(private eventService: EventService, private token: TokenStorageService, private toastr: ToastrService,
     private http: HttpClient,
     private popUpService: PopupPanelService) { }
+=======
+  constructor(private eventService: EventService, private token: TokenStorageService, private toastr: ToastrService) { }
+>>>>>>> DIONYSOS-41
 
   ngOnInit(): void {
     this.getAllEvents();

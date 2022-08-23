@@ -14,6 +14,11 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   username?: string;
 
+  isAdmin = false;
+  isModerator = false;
+  isUser = false;
+
+
   constructor(
     private tokenStorageService : TokenStorageService,
     private router: Router,
@@ -26,12 +31,20 @@ export class NavbarComponent implements OnInit {
 
     if(this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      console.log("NavBar, user : " + JSON.stringify(user))
       this.roles = user.roles;
       this.username = user.username;
-      console.log("NavBar, username : " + user.username)
     }
-  }  
+
+    if(this.roles.includes('ROLE_ADMIN')) {
+      this.isAdmin = true;
+    } else if(this.roles.includes('ROLE_MODERATOR')) {
+      this.isModerator = true;
+    } else {
+      this.isUser = true
+    }
+
+
+  }
 
   logout(): void {
     this.isLoggedIn = false;

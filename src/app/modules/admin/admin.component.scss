@@ -1,0 +1,64 @@
+.facility .box-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+
+.facility .box-container .box{
+  text-align: center;
+}
+
+
+.facility .box-container .box img{
+  height: 10rem;
+  margin-bottom: .5rem;
+}
+
+.facility .box-container .box h3{
+  font-size: 2rem;
+  color: black;
+  margin: 1rem 0;
+}
+
+.facility .box-container .box p{
+  line-height: 2;
+  font-size: 1.5rem;
+  color: lightblue;
+}
+.btn {
+  width: 150px;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 49px;
+  cursor: pointer;
+  /* background-color: var(--btn-color); */
+  color: black;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  transition: 0.5s;
+  background-color: #820f4a;
+  color: #fff;
+}
+
+.btn:hover {
+  /* background-color: var(--btn-hover); */
+  background-color: #820f4a;
+  color: black;
+;
+}
+
+.btn.transparent {
+  margin: 0;
+  background: none;
+  border: 2px solid #fff;
+  width: 130px;
+  height: 41px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+

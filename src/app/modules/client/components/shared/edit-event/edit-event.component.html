@@ -1,7 +1,8 @@
 <div class="container">
     <div class="forms-container">
       <div class="event">
-  
+        <div class="event-header">
+          <h1>Création votre événement</h1>
         <form
           class="event-form"
           name="form"
@@ -9,9 +10,9 @@
           (ngSubmit)="f.form.valid && onSubmit()"
           #f="ngForm"
           novalidate>
-         
+
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
+            <!-- <i class="fas fa-user"></i>
              [(ngModel)]="form.eventTitle | date:'yyyy-MM-ddTHH:mm'"
              #eventTitle="ngModel"
             -->
@@ -24,7 +25,7 @@
               required>
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
+            <!-- <i class="fas fa-user"></i>
                       [(ngModel)]="form.city"
               #city="ngModel"
             -->
@@ -37,11 +38,11 @@
               required>
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
+            <!-- <i class="fas fa-user"></i>
                 [(ngModel)]="form.hourBegin"
                 #hourBegin="ngModel"
             -->
-            <label for="hourBegin">Date et heure début 
+            <label name="hourBegin">Date et heure début
                 <input
                 type="datetime-local"
                 name="hourBegin"
@@ -53,11 +54,11 @@
 
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i> 
+            <!-- <i class="fas fa-user"></i>
                 [(ngModel)]="form.hourEnd"
                 #hourEnd="ngModel"
             -->
-            <label for="hourEnd">Date et heure fin 
+            <label name="hourEnd">Date et heure fin
                 <input
                 type="datetime-local"
                 name="hourEnd"
@@ -66,8 +67,20 @@
                 placeholder="Date et heure fin "
                 required>
             </label>
-
           </div>
+
+          <div class="">
+
+            <label name="category"></label>
+              <select name="category" formControlName="category" required>
+                <option value="1">--Choisissez une catégorie--</option>
+                <ng-container>
+                  <option *ngFor="let categorie of categories" [value]="categorie.name">{{categorie.name}}</option>
+                </ng-container>
+              </select>
+          </div>
+
+
           <div class="input-field">
             <!-- <i class="fas fa-user"></i>
               [(ngModel)]="form.description"
@@ -81,11 +94,11 @@
               placeholder="Description "
               required>
           </div>
-  
+
           <input type="submit" value="Ajouter Event" class="btn solid">
-  
+
         </form>
-  
+
       </div>
     </div>
     <div class="panels-container">
@@ -100,8 +113,11 @@
             </div>
           </div> -->
         </div>
+
       </div>
   </div>
+</div>
 
-  
-  
+
+
+
