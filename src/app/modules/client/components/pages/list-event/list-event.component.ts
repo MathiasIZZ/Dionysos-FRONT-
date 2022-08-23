@@ -18,35 +18,33 @@ export class ListEventComponent implements OnInit {
   map?: any;
   cities: string = '/assets/data/french-cities.geojson';
   events: Event[] = [];
-  
+
   errorMessage?: string;
 
-<<<<<<< HEAD
+
   // SI on veut gérer l'ajout d'un event pour un user connecté, faudra passer par le tokerStorageService
   // constructor(private eventService: EventService, private token: TokenStorageService) { }
   constructor(private eventService: EventService, private token: TokenStorageService, private toastr: ToastrService,
     private http: HttpClient,
     private popUpService: PopupPanelService) { }
-=======
-  constructor(private eventService: EventService, private token: TokenStorageService, private toastr: ToastrService) { }
->>>>>>> DIONYSOS-41
+
 
   ngOnInit(): void {
     this.getAllEvents();
     this.makeEventMarkers(this.map);
     // this.getAdresseFromDataGouv();
     this.getAdresseFromDataGouvByHttpClient();
-   
+
   }
 
 
   getAllEvents() {
-    
+
     this.eventService.findAll().subscribe({
       next: (data) => {
         this.events = data;
         console.log('LIST Events : ', this.events.toString);
-        
+
       },
       error: (err) => {
         this.errorMessage = err.message;
@@ -114,17 +112,17 @@ export class ListEventComponent implements OnInit {
         .then(response => response.json)
         .then(data => console.log('request succeeded whith JSON response', data))
         .catch(error => console.log('request failed', error));
-  
+
     }
-  
+
     getAdresseFromDataGouvByHttpClient() {
       // TEST par HttpClient
       const params = {q: 'lyo'};
       let url = `http://api-adresse.data.gouv.fr/search/?q=${params}`;
-      console.log('RETURN TEST API : ', this.http.get<JSON>(url).subscribe((data) => 
+      console.log('RETURN TEST API : ', this.http.get<JSON>(url).subscribe((data) =>
         console.log('DATA API = ', data)
       ));
       return this.http.get<JSON>(url);
-      
+
     }
 }
