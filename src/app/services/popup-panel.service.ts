@@ -12,11 +12,15 @@ export class PopupPanelService {
     return ``+
     `<div>Ville : ${ data.name } </div>`
   }
-  makeEventPopup(data: Event): string {
+  makeEventPopup(data: Event): any {
     return ``+
     `<div>
       Evenement : ${ data.eventTitle } 
+    </div>`  +
+    `<div>
       Ville : ${ data.city } 
+    </div>` +
+    `<div>
       Heure Début : ${ data.hourBegin } 
     </div>`
   }
