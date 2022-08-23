@@ -39,12 +39,16 @@ export class UserService {
     return this.http.get(`${environment.USER_API}`+ '/all')
   }
 
+  findByName(name: string): Observable<any> {
+    return this.http.get(`${environment.USER_API}`+ `/${name}`, { responseType: 'text' });
+  }
+
   updateEmail(id: string, email: string): Observable<any> {
     return this.http.patch<User>(`${environment.USER_API}/${id}/email`, {email: email}, httpOptions);
   }
 
-  updatePassword(id: string, password: string, newPassword: string): Observable<any> { 
+  updatePassword(id: string, password: string, newPassword: string): Observable<any> {
     return this.http.patch<User>(`${environment.USER_API}/${id}/password`, {password: password, newPassword: newPassword});
   }
-  
-} 
+
+}

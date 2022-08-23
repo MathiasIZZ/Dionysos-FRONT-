@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   constructor(private eventService: EventService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
+    this.getAllEvents();
   }
 
   getAllEvents() {
@@ -37,6 +37,9 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  addEvent() {
+    window.location.assign("/client/add/event");
+  }
 
 
 

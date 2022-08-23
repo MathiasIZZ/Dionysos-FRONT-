@@ -5,6 +5,7 @@ import { Event } from 'src/app/models/event.entity';
 import { EventService } from 'src/app/services/event.service';
 import {Category} from "../../../../../models/Category.entity";
 import {CategoryService} from "../../../../../services/category.service";
+import {TokenStorageService} from "../../../../../auth/token-storage.service";
 
 @Component({
   selector: 'app-edit-event',
@@ -19,10 +20,14 @@ export class EditEventComponent implements OnInit {
     city: "",
     hourBegin: "",
     hourEnd: "",
+    createdAt: new Date(),
     category: "",
     description: "",
-    isAlive: true
+    isAlive: true,
+    author: String
   });
+
+  authorId?: String;
 
   event?: Event;
   errorMessage?: string;
@@ -34,10 +39,15 @@ export class EditEventComponent implements OnInit {
   constructor(private eventService: EventService,
       private cateoryService: CategoryService,
       private toastr: ToastrService,
-      private fb: FormBuilder,) { }
+      private fb: FormBuilder,
+      private tokenStotageService: TokenStorageService  ) { }
 
   ngOnInit(): void {
     this.getAllCategories();
+
+    const user = this.tokenStotageService.getUser();
+    this.authorId = user.id;
+
   }
 
   onSubmit(): void {
@@ -47,28 +57,17 @@ export class EditEventComponent implements OnInit {
       city: this.form.get('city')?.value,
       hourBegin: this.form.get('hourBegin')?.value.toString().replace("T"," "),
       hourEnd: this.form.get('hourEnd')?.value.toString().replace("T"," "),
+      createdAt: new Date(),
       category: this.form.get('category')?.value,
       description: this.form.get('description')?.value,
-      isAlive: true
+      isAlive: true,
+      authorId: this.authorId
     });
 
-    // this.form.patchValue(this.form.get('hourBegin')?.value.toString().replace("T"," "));
-    // this.form.patchValue(this.form.get('hourBegin')?.value.toString().replace("T"," "));
-    // this.form.get('hourBegin')?.value.toString().replace("T"," ");
-    // this.form.get('hourBegin')?.value.toString().replace("T"," ");
-    this.hourBegin = this.form.get('hourBegin')?.value;
-
-    console.log("Vérif Format date debut : " + this.form.get('hourBegin')?.value);
-    console.log("Vérif Format date debut : " + this.form.get('hourBegin')?.value);
-    console.log("Vérif hourBegin : " + this.hourBegin);
-    console.log("vétif de la catégorie:" + this.form.get('category')?.value);
-    // this.eventService.save(this.event!).subscribe({
-    // this.eventService.save(this.form.value).subscribe({
+    console.log(this.form.value);
 
     this.eventService.save(this.form.value).subscribe({
       next: () => {
-        // this.event = data;
-        // this.form = data;
         console.log("data added : " + this.form.value);
         this.toastr.success("Ajout ok", 'Evénement ajouter avec succès', {
           timeOut: 3000,
@@ -84,6 +83,9 @@ export class EditEventComponent implements OnInit {
         });
       }
     });
+
+
+
   }
 
 
