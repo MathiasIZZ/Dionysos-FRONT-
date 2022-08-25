@@ -19,6 +19,9 @@ import { ClientModule } from './modules/client/client.module';
 import {MatIconModule} from "@angular/material/icon";
 import {ToastrModule} from "ngx-toastr";
 import { MapComponent } from './components/shared/map/map.component';
+import {MaterialModule} from "./components/shared/material/material.module";
+
+
 
 
 
@@ -42,7 +45,9 @@ import { MapComponent } from './components/shared/map/map.component';
     HttpClientModule,
     ClientModule,
     MatIconModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MaterialModule,
+
   ],
   providers: [authInterceptorProviders, MarkerService, PopupPanelService],
   bootstrap: [AppComponent]

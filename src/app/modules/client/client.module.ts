@@ -17,6 +17,7 @@ import { ListEventComponent } from './components/pages/list-event/list-event.com
 import { MapComponent } from 'src/app/components/shared/map/map.component';
 
 import {MatIconModule} from "@angular/material/icon";
+import {MaterialModule} from "../../components/shared/material/material.module";
 
 
 
@@ -41,7 +42,8 @@ import {MatIconModule} from "@angular/material/icon";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MaterialModule
   ]
 })
 export class ClientModule { }

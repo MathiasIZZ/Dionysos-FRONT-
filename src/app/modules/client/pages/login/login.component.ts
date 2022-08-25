@@ -3,6 +3,10 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import {ToastrService} from "ngx-toastr";
 
+
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,6 +19,7 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null
   };
+
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -25,8 +30,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.verifToken();
-
-
 
   }
 
