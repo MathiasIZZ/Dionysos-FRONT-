@@ -40,6 +40,19 @@
         "properties": {
           "name": "Lille"
         }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.57918,
+            44.837789
+          ]
+        },
+        "properties": {
+          "name": "Bordeaux"
+        }
       }
     ]
   }
