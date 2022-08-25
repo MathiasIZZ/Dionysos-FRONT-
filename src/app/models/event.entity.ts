@@ -1,4 +1,5 @@
 
+import { Address } from "./address.entity";
 import { Category } from "./Category.entity";
 import { Marker } from "./Marker.entity";
 import { User } from "./user.entity";
@@ -8,11 +9,17 @@ export class Event {
     eventTitle?: string;
     // ?: string;
     city?: string;
+    // address?: Address;
+    num?: string;
+    street?: string;
     // address?: string = "";
     hourBegin?: Date;
     hourEnd?: Date;
     createdAt?: Date;
     description?: string;
+    userLikes?: number;
+    userDislikes?: number;
+    usersParticipating?: number;
     // userLikes?: User[] = [];
     // userDislikes?: User[] = [];
     // usersParticipating?: User[] = [];
@@ -21,5 +28,5 @@ export class Event {
     // comments?: Comment[] = [];
     isAlive: boolean = true;
 
-    author?: User;
+    authorId?: string;
 }

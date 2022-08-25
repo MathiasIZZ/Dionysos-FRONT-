@@ -35,16 +35,17 @@ export class MapComponent implements OnInit, AfterViewInit {
     private tokenStorageService : TokenStorageService) { }
     
   ngOnInit() {
-    
+
   }
 
   ngAfterViewInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.markerService.getCurrentPositionMarker(this.map);
-    } else {
-      this.markerService.makeCityMarkers(this.map);
-    }
+    } 
+    // else {
+    //   this.markerService.makeCityMarkers(this.map);
+    // }
 
     if (!navigator.geolocation) {
       console.log('location is not supported');

@@ -11,6 +11,7 @@ import { PopupPanelService } from 'src/app/services/popup-panel.service';
 import {Category} from "../../../../../models/Category.entity";
 import {CategoryService} from "../../../../../services/category.service";
 import {TokenStorageService} from "../../../../../auth/token-storage.service";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,12 +21,12 @@ import {TokenStorageService} from "../../../../../auth/token-storage.service";
 })
 export class EditEventComponent implements OnInit {
 
-
-
   map?: any;
   cities: string = '/assets/data/french-cities.geojson';
   form = this.fb.group({
     eventTitle: "",
+    num: "",
+    street: "",
     city: "",
     hourBegin: "",
     hourEnd: "",
@@ -36,15 +37,15 @@ export class EditEventComponent implements OnInit {
     author: String
   });
 
-  authorId?: String;
+  authorId?: string;
 
   event?: Event;
   errorMessage?: string;
   hourBegin!: Date;
-
   events: Event[] = [];
-
   categories: Category[] = [];
+  dataFromApiAdresse: any;
+  category: Category = new Category();
 
 
 
@@ -53,6 +54,7 @@ export class EditEventComponent implements OnInit {
       private toastr: ToastrService,
       private fb: FormBuilder,
       private http: HttpClient,
+      private router: Router,
       private popupService: PopupPanelService,
       private tokenStorageService: TokenStorageService) { }
 
@@ -60,21 +62,21 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories();
-
     const user = this.tokenStorageService.getUser();
     this.authorId = user.id;
-
 
   }
 
   onSubmit(): void {
-
+   
     this.form = this.fb.group({
       eventTitle: this.form.get('eventTitle')?.value,
+      num: this.form.get('num')?.value,
+      street: this.form.get('street')?.value,
       city: this.form.get('city')?.value,
       hourBegin: this.form.get('hourBegin')?.value.toString().replace("T"," "),
       hourEnd: this.form.get('hourEnd')?.value.toString().replace("T"," "),
-      createdAt: new Date(),
+      createdAt: new Date().toISOString().replace("T"," ").replace("Z"," ").slice(0, 19),
       category: this.form.get('category')?.value,
       description: this.form.get('description')?.value,
       isAlive: true,
@@ -82,27 +84,102 @@ export class EditEventComponent implements OnInit {
     });
 
     console.log(this.form.value);
+    console.log('FORMAT DATE :', new Date().toISOString().replace("T"," ").replace("Z"," "));
+    console.log('FORMAT DATE indexOf:', new Date().toISOString().replace("T"," ").replace("Z"," ").slice(0, 19));
+   
+    let nameStreet: string = this.form.get('street')?.value;
+    const reg = /\s/g;
+    console.log('RegEx : ', nameStreet.replace(reg,"+"));
+    if(this.form.get('num')?.value === " ") {
+      console.log('Num vide, nameStreet.trim() =', nameStreet.trim());
+      let query: string = nameStreet.replace(reg,"+")
+      +"+"+ this.form.get('city')?.value;
+      this.eventService.getDataFromApiAdresse(query).subscribe((data) => {
+        this.dataFromApiAdresse = data;
+        console.log('Data récupéré depuis API Adresse :', this.dataFromApiAdresse);
+        
+        if(this.dataFromApiAdresse.features) {
+          let jsonData = this.dataFromApiAdresse.features[0];
+          console.log('jsonData = ', jsonData);
+          if(this.event?.city === jsonData.properties.city) {
+            // this.event.marker.longitude = lon;
+            // this.event.marker.latitude = lat;
+            const lon = jsonData.geometry.coordinates[0];
+            const lat = jsonData.geometry.coordinates[1];
+            console.log('FROM API ADRESSE lon', lon);
+            console.log('FROM API ADRESSE lat', lat);
+          }
+        }
+      });
+    }
+    // for(let char of nameStreet) {
+    //   if (char.match(" ")) {
+    //     console.log(char.match(" "));
+        
+    //   }
+    // }
 
-    this.eventService.save(this.form.value).subscribe({
-      next: () => {
-        console.log("data added : " + this.form.value);
-        this.toastr.success("Ajout ok", 'Evénement ajouter avec succès', {
-          timeOut: 3000,
-          progressBar: true
-        });
-        // this.postCurrentPositionEventMarker(this.map);
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
-        console.log("add event failed")
-        this.toastr.error(this.errorMessage , 'Echec de l\'ajout de l\'événement', {
-          timeOut: 3000,
-          progressBar: true
-        });
+    if(this.form.get('num')?.value !== " ") {
+      let query: string = this.form.get('num')?.value.trim() + "+" + nameStreet.replace(" ","+").replace(" ","+")
+      +"+"+ this.form.get('city')?.value;
+      console.log('query', query);
+      this.eventService.getDataFromApiAdresse(query).subscribe((data) => {
+        this.dataFromApiAdresse = data;
+        console.log('Data récupéré depuis API Adresse :', this.dataFromApiAdresse);
+        
+        if(this.dataFromApiAdresse.features) {
+          let jsonData = this.dataFromApiAdresse.features[0];
+          console.log('jsonData = ', jsonData);
+          if(this.event?.city === jsonData.properties.city) {
+            // this.event.marker.longitude = lon;
+            // this.event.marker.latitude = lat;
+            const lon = jsonData.geometry.coordinates[0];
+            const lat = jsonData.geometry.coordinates[1];
+            console.log('FROM API ADRESSE lon', lon);
+            console.log('FROM API ADRESSE lat', lat);
+          }
+        }
+      });
+    }
+ 
+    this.event = this.form.value;
+    
+    if (this.event) {
+      this.event.category = this.category;
+      if(this.event.category) {
+        this.event.category.name = this.category.name;
+        this.event.category.name = this.form.get('category')?.value;
       }
 
-    });
+      // TODO
+      // ON POURRA SET les likes et dislikes ici plutôt que dans le back
+      this.event.userLikes = 15;
+      console.log('Event to save before subscribe: ', this.event)
+      this.eventService.save(this.event).subscribe({
+        next: () => {
+          console.log("data added : " + this.form.value);
+          this.toastr.success("Ajout ok", 'Evénement ajouter avec succès', {
+            timeOut: 3000,
+            progressBar: true
+          });
+
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+          console.log("add event failed")
+          this.toastr.error(this.errorMessage , 'Echec de l\'ajout de l\'événement', {
+            timeOut: 3000,
+            progressBar: true
+          });
+        }
+      });
+      this.router.navigateByUrl("/client/event").then(() => {
+        // window.location.reload();
+        this.getCurrentPositionEventMarker(this.map);
+      });
+    }
   }
+
   makeEventMarkers(map: L.Map): any{
     this.getAllEvents();
     map = L.map('map').setView([46.227638, 2.213749], 6);
@@ -135,7 +212,7 @@ export class EditEventComponent implements OnInit {
 
   getAllEvents() {
 
-    this.eventService.findAll().subscribe({
+    this.eventService.findAllReducted().subscribe({
       next: (data) => {
         this.events = data;
         console.log('LIST Events : ', this.events.toString);
@@ -155,9 +232,6 @@ export class EditEventComponent implements OnInit {
 
   }
 
-
-
-
   getAllCategories() {
     this.cateoryService.findAll().subscribe( {
       next: (data) => {
@@ -170,39 +244,37 @@ export class EditEventComponent implements OnInit {
       }
     })
   }
-  // postCurrentPositionEventMarker(map: L.Map): any {
-  //   // Affiche par défaut la carte de la France
-  //   // Après Autorisation: géolocalisation
-  //   map = L.map('map').setView([46.227638, 2.213749], 6);
-  //   const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-  //     maxZoom: 18,
-  //     minZoom: 5,
-  //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,' +
-	// 		' © <a href="https://www.mapbox.com/">Mapbox</a>',
-  //     id: 'mapbox/streets-v11',
-  //     tileSize: 512,
-	// 	  zoomOffset: -1
-  //   });
-  //   tiles.bindPopup(this.popupService.makeEventPopup(this.form.value));
-  //   tiles.addTo(map);
-  //   function onLocationFound(e: { accuracy: any; latlng: L.LatLngExpression; }) {
-  //     var radius = e.accuracy;
-  //     // L.marker(e.latlng).addTo(map)
-  //     //     .bindPopup("You are within " + radius + " meters from this point").openPopup();
-  //     // L.marker(e.latlng).bindPopup(this.popupService.makeEventPopup(this.form.value)).openPopup();
-  //     L.marker(e.latlng).addTo(map);
 
-  //     L.circle(e.latlng, radius).addTo(map);
-  //     console.log(e.latlng);
-  //   }
-  //   function onLocationError(e: { message: any; }) {
-  //     alert(e.message);
-  //   }
+  getCurrentPositionEventMarker(map: L.Map): any {
+    // Affiche par défaut la carte de la France
+    // Après Autorisation: géolocalisation 
+    map = L.map('map').setView([46.227638, 2.213749], 6);
+    const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 18,
+      minZoom: 5,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,' +
+			' © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+		  zoomOffset: -1
+    });
+    tiles.addTo(map);
+    function onLocationFound(e: { accuracy: any; latlng: L.LatLngExpression; }) {
+      var radius = e.accuracy;
+      L.marker(e.latlng).addTo(map)
+          .bindPopup("Vous êtes dans un rayon de " + radius + " métres de l'EVENT crée !!").openPopup();
+  
+      L.circle(e.latlng, radius).addTo(map);
+      console.log(e.latlng);
+    }
+    function onLocationError(e: { message: any; }) {
+      alert(e.message);
+    }
 
-  //   map.on('locationfound', onLocationFound);
-  //   map.on('locationerror', onLocationError);
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
 
-  //   map.locate({setView: true, maxZoom: 16});
-  // }
+    map.locate({setView: true, maxZoom: 16});
+  }
 
 }

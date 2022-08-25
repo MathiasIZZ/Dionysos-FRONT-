@@ -12,9 +12,9 @@ import { EditPanelComponent } from './components/shared/edit-panel/edit-panel.co
 import { ClientRoutingModule } from './client-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ListEventComponent } from './components/pages/list-event/list-event.component';
+// import { ListEventComponent } from './components/pages/list-event/list-event.component';
 
-import { MapComponent } from 'src/app/components/shared/map/map.component';
+// import { MapComponent } from 'src/app/components/shared/map/map.component';
 
 import {MatIconModule} from "@angular/material/icon";
 import {MaterialModule} from "../../components/shared/material/material.module";
@@ -32,8 +32,9 @@ import {MaterialModule} from "../../components/shared/material/material.module";
     RegisterComponent,
     LoginComponent,
     EditEventComponent,
-    EditPanelComponent,
-    ListEventComponent
+    EditPanelComponent
+    // ,
+    // ListEventComponent
 
   ],
   imports: [

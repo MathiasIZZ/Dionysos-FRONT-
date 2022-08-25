@@ -25,6 +25,24 @@
               required>
           </div>
           <div class="input-field">
+            <input
+              type="text"
+              name="num"
+              formControlName="num"
+              autocomplete="num"
+              placeholder="Numéro de rue"
+              required>
+          </div>
+          <div class="input-field">
+            <input
+              type="text"
+              name="street"
+              formControlName="street"
+              autocomplete="street"
+              placeholder="Nom de rue"
+              required>
+          </div>
+          <div class="input-field">
             <!-- <i class="fas fa-user"></i>
                       [(ngModel)]="form.city"
               #city="ngModel"
@@ -69,15 +87,16 @@
             </label>
           </div>
 
-          <div class="">
-
-            <label name="category"></label>
+          <div class="input-field">
+            <label name="category">Catégorie
               <select name="category" formControlName="category" required>
                 <option value="1">--Choisissez une catégorie--</option>
                 <ng-container>
                   <option *ngFor="let categorie of categories" [value]="categorie.name">{{categorie.name}}</option>
                 </ng-container>
               </select>
+            </label>
+
           </div>
 
 
@@ -106,12 +125,6 @@
           <div class="content">
             <h2 class="title">AJOUTER UN EVENEMENT </h2>
           </div>
-          <!-- <div class="map-container">
-            <div class="map-frame">
-                <div id="map">
-                </div>
-            </div>
-          </div> -->
         </div>
 
       </div>

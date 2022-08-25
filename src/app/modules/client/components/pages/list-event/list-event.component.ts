@@ -15,46 +15,77 @@ import { PopupPanelService } from 'src/app/services/popup-panel.service';
 })
 export class ListEventComponent implements OnInit {
 
+  private roles: string[] = [];
   map?: any;
   cities: string = '/assets/data/french-cities.geojson';
   events: Event[] = [];
 
   errorMessage?: string;
-
+  isLoggedIn = false;
+  username?: string;
 
   // SI on veut gérer l'ajout d'un event pour un user connecté, faudra passer par le tokerStorageService
   // constructor(private eventService: EventService, private token: TokenStorageService) { }
-  constructor(private eventService: EventService, private token: TokenStorageService, private toastr: ToastrService,
+  constructor(private eventService: EventService, private tokenStorageService: TokenStorageService, private toastr: ToastrService,
     private http: HttpClient,
     private popUpService: PopupPanelService) { }
 
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if(this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.username = user.username;
+      // this.makeEventMarkers(this.map);
+    }
+
     this.getAllEvents();
     this.makeEventMarkers(this.map);
+    // this.makeEventMarkers(this.map);
     // this.getAdresseFromDataGouv();
-    this.getAdresseFromDataGouvByHttpClient();
+    // this.getAdresseFromDataGouvByHttpClient();
 
   }
 
 
   getAllEvents() {
 
-    this.eventService.findAll().subscribe({
-      next: (data) => {
-        this.events = data;
-        console.log('LIST Events : ', this.events.toString);
+    // Dans le cas d'un visiteur, findAllReducted liste réduite
+    // SI USER, utiliser findAll
+    if(this.isLoggedIn) {
+      this.eventService.findAll().subscribe({
+        next: (data) => {
+          this.events = data;
+          console.log('LIST Events : ', this.events.toString);
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+          console.log("LIST EVENT failed")
+          this.toastr.error('Error', 'Events not found', {
+            timeOut: 3000,
+            progressBar: true
+          });
+        }
+      });
+    } else {
+      this.eventService.findAllReducted().subscribe({
+        next: (data) => {
+          this.events = data;
+          console.log('LIST Events Reducted : ', this.events.toString);
+  
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+          console.log("LIST EVENT Reducted failed")
+          this.toastr.error('Error', 'Events not found', {
+            timeOut: 3000,
+            progressBar: true
+          });
+        }
+      });
+    }
 
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
-        console.log("LIST EVENT failed")
-        this.toastr.error('Error', 'Events not found', {
-          timeOut: 3000,
-          progressBar: true
-        });
-      }
-    });
   }
 
   addEvent() {
@@ -115,14 +146,14 @@ export class ListEventComponent implements OnInit {
 
     }
 
-    getAdresseFromDataGouvByHttpClient() {
-      // TEST par HttpClient
-      const params = {q: 'lyo'};
-      let url = `http://api-adresse.data.gouv.fr/search/?q=${params}`;
-      console.log('RETURN TEST API : ', this.http.get<JSON>(url).subscribe((data) =>
-        console.log('DATA API = ', data)
-      ));
-      return this.http.get<JSON>(url);
+    // getAdresseFromDataGouvByHttpClient() {
+    //   // TEST par HttpClient
+    //   const params = {q: 'lyo'};
+    //   let url = `http://api-adresse.data.gouv.fr/search/?q=${params}`;
+    //   console.log('RETURN TEST API : ', this.http.get<JSON>(url).subscribe((data) =>
+    //     console.log('DATA API = ', data)
+    //   ));
+    //   return this.http.get<JSON>(url);
 
-    }
+    // }
 }

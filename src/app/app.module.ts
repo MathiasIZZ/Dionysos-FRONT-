@@ -19,7 +19,13 @@ import { ClientModule } from './modules/client/client.module';
 import {MatIconModule} from "@angular/material/icon";
 import {ToastrModule} from "ngx-toastr";
 import { MapComponent } from './components/shared/map/map.component';
+
 import {MaterialModule} from "./components/shared/material/material.module";
+
+import { ListEventComponent } from './modules/client/components/pages/list-event/list-event.component';
+
+
+
 
 
 @NgModule({
@@ -29,7 +35,8 @@ import {MaterialModule} from "./components/shared/material/material.module";
     FooterComponent,
     HomeComponent,
     NotfoundComponent,
-    MapComponent
+    MapComponent,
+    ListEventComponent
 
   ],
   imports: [

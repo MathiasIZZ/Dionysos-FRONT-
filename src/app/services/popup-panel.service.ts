@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event } from '../models/event.entity';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,9 @@ export class PopupPanelService {
     </div>`  +
     `<div>
       Ville : ${ data.city } 
+    </div>` +
+    `<div>
+    Like : ${ data.userLikes } 
     </div>` +
     `<div>
       Heure Début : ${ data.hourBegin } 
