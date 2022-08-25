@@ -22,11 +22,6 @@ import { MapComponent } from './components/shared/map/map.component';
 import {MaterialModule} from "./components/shared/material/material.module";
 
 
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
