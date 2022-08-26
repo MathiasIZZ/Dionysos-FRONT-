@@ -23,6 +23,7 @@ import { MapComponent } from './components/shared/map/map.component';
 import {MaterialModule} from "./components/shared/material/material.module";
 
 import { ListEventComponent } from './modules/client/components/pages/list-event/list-event.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 
@@ -39,18 +40,19 @@ import { ListEventComponent } from './modules/client/components/pages/list-event
     ListEventComponent
 
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ClientModule,
-    MatIconModule,
-    ToastrModule.forRoot(),
-    MaterialModule,
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ClientModule,
+        MatIconModule,
+        ToastrModule.forRoot(),
+        MaterialModule,
+        MatCardModule,
 
-  ],
+    ],
   providers: [authInterceptorProviders, MarkerService, PopupPanelService],
   bootstrap: [AppComponent]
 })
