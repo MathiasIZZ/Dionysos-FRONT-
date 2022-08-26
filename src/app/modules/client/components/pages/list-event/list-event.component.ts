@@ -38,15 +38,15 @@ export class ListEventComponent implements OnInit {
       console.log("User by token : ", user);
       this.roles = user.roles;
       this.username = user.username;
-      setTimeout(() => {
-        this.getCurrentPositionEventMarker(this.map);
-      }, 3000);
+      // setTimeout(() => {
+      //   this.getCurrentPositionEventMarker(this.map);
+      // }, 1000);
       // this.getCurrentPositionEventMarker(this.map);
       // this.makeEventMarkers(this.map);
     }
 
     this.getAllEvents();
-    this.makeEventMarkers(this.map);
+    // this.makeEventMarkers(this.map);
     // this.makeEventMarkers(this.map);
     // this.getAdresseFromDataGouv();
     // this.getAdresseFromDataGouvByHttpClient();
@@ -61,6 +61,7 @@ export class ListEventComponent implements OnInit {
         next: (data) => {
           this.events = data;
           console.log('LIST Events : ', this.events.toString);
+          this.makeEventMarkers(this.map);
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -76,7 +77,7 @@ export class ListEventComponent implements OnInit {
         next: (data) => {
           this.events = data;
           console.log('LIST Events Reducted : ', this.events.toString);
-  
+          this.makeEventMarkers(this.map);
         },
         error: (err) => {
           this.errorMessage = err.message;
@@ -154,6 +155,7 @@ export class ListEventComponent implements OnInit {
     map.on('locationerror', onLocationError);
 
     map.locate({setView: true, maxZoom: 16});
+
   }
 
     // TEST GEOCODING API ADRESSE
