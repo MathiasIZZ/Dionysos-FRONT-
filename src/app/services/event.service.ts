@@ -23,6 +23,10 @@ export class EventService {
     return this.http.get(`${environment.EVENT_API}`+ '/all/reducted');
   }
 
+  findAllByCity(city: string): Observable<any> {
+    return this.http.get(`${environment.EVENT_API}/all/${city}`);
+  }
+
   save(event: Event): Observable<Event> {
     return this.http.post<Event>(`${environment.EVENT_API}/new`, event);
   }

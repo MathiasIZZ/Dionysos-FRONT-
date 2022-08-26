@@ -49,8 +49,7 @@ export class ProfileComponent implements OnInit {
 
   updateEmail() {
     this.userService.updateEmail(
-      this.id,
-      this.emailForm.value.email
+      this.user
     ).subscribe({
       next: () => {
         this.showUpdateEmail = true;
@@ -70,9 +69,7 @@ export class ProfileComponent implements OnInit {
 
   updatePassword() {
     this.userService.updatePassword(
-      this.id,
-      this.passwordForm.value.password,
-      this.passwordForm.value.newPassword
+      this.user
     ).subscribe({
       next: () => {
         this.showUpdatePassword = true;

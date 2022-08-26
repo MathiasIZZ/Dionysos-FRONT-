@@ -32,7 +32,6 @@ import {MatIconModule} from "@angular/material/icon";
     LoginComponent,
     EditEventComponent,
     EditPanelComponent
-    // ,
     // ListEventComponent
 
   ],

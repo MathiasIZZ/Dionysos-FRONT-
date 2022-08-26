@@ -43,12 +43,12 @@ export class UserService {
     return this.http.get(`${environment.USER_API}`+ `/${name}`, { responseType: 'text' });
   }
 
-  updateEmail(id: string, email: string): Observable<any> {
-    return this.http.patch<User>(`${environment.USER_API}/${id}/email`, {email: email}, httpOptions);
+  updateEmail(user: User): Observable<any> {
+    return this.http.put<User>(`${environment.USER_API}/update/email`, user);
   }
 
-  updatePassword(id: string, password: string, newPassword: string): Observable<any> {
-    return this.http.patch<User>(`${environment.USER_API}/${id}/password`, {password: password, newPassword: newPassword});
+  updatePassword(user: User): Observable<any> {
+    return this.http.put<User>(`${environment.USER_API}/update/password`, user);
   }
 
 }
