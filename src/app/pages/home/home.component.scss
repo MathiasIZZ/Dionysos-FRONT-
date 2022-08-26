@@ -24,7 +24,16 @@ section{
   font-size: 6rem;
   color: black;
   font-family: 'Merienda One', cursive;
+  font: 400 56px / 49px Merienda One, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+	margin: 0 0 16px;
 }
+
+// .mat-typography h3 {
+// 	font: 400 16px / 49px Roboto, "Helvetica Neue", sans-serif;
+// 	letter-spacing: normal;
+// 	margin: 0 0 16px;
+// }
 
 .home-bg .home .content p{
   padding: 1rem 0;
