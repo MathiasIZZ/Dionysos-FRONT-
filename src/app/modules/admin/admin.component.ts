@@ -6,8 +6,8 @@ import {EventService} from "../../services/event.service";
 import {Event} from "../../models/event.entity";
 import {ToastrService} from "ngx-toastr";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import { IEvent } from "../../models/IEvent";
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+
 
 
 
@@ -20,32 +20,77 @@ import { IEvent } from "../../models/IEvent";
 })
 export class AdminComponent implements OnInit, AfterViewInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @ViewChild(MatTable, { static: true }) table!: MatTable<any>;
+
+
+  displayedColumns: string[] = [
+    // '_id',
+    'eventTitle',
+    'city',
+    'num',
+    'street',
+    'hourBegin',
+    'hourEnd',
+    'createdAt',
+    // 'userLikes',
+    // 'userDislikes',
+    // 'usersParticipating',
+    // 'category',
+    'isAlive',
+    'description',
+    'authorId'
+  ];
 
 
   events: Event[] = [];
 
+  dataSource!: MatTableDataSource<Event>;
 
 
-  constructor(private eventService: EventService, private toastr: ToastrService) { }
+
+  constructor(
+    private eventService: EventService,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) { }
 
 
   ngOnInit(): void {
     this.getAllEvents();
+
+
   }
 
   ngAfterViewInit(): void {
-    // @ts-ignore
     this.dataSource.paginator = this.paginator;
+
   }
 
 
 
-  displayedColumns: string[] = ['eventTitle', 'city', 'hourBegin', 'description', 'authorId'];
 
-  ELEMENT_DATA: IEvent[] = [
-    {eventTitle: "concert", city: "Bordeaux", hourBegin: "2022-08-28 23:00:00", description: "énorme concert!!", authorId: "dfgdfgdf56g1fd65g"}
-  ]
+
+  getAllEvents() {
+    this.eventService.findAll().subscribe({
+      next: (data) => {
+        this.dataSource = new MatTableDataSource<Event>(data);
+        this.dataSource.paginator = this.paginator;
+        this.events = data;
+      },
+      error: () => {
+        this.toastr.error('Error', 'Impossible de charger les événements', {
+          timeOut: 3000,
+          progressBar: true
+        });
+      }
+    });
+  }
+
+
+
+
 
 
   // ELEMENT_DATA: IEvent[] = [
@@ -71,30 +116,36 @@ export class AdminComponent implements OnInit, AfterViewInit {
   //   { name: 'Calcium', weight: 40.078, symbol: 'Ca'},
   // ];
 
-  dataSource = new MatTableDataSource<IEvent>(this.ELEMENT_DATA);
 
 
-
-
-
-  getAllEvents() {
-    this.eventService.findAll().subscribe({
-      next: (data) => {
-        this.events = data;
-        console.log(this.events.toString);
-      },
-      error: () => {
-        this.toastr.error('Error', 'Impossible de charger les événements', {
-          timeOut: 3000,
-          progressBar: true
-        });
-      }
-    });
-  }
 
   addEvent() {
     window.location.assign("/client/add/event");
   }
+
+
+
+
+
+
+
+  // displayedColumns: string[] = [
+  //   '_id',
+  //   'eventTitle',
+  //   'city',
+  //   'num',
+  //   'street',
+  //   'hourBegin',
+  //   'hourEnd',
+  //   'createdAt',
+  //   'userLikes',
+  //   'userDislikes',
+  //   'usersParticipating',
+  //   'category',
+  //   'isAlive',
+  //   'description',
+  //   'authorId'
+  // ];
 
 
 
