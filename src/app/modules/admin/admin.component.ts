@@ -22,8 +22,11 @@ import {Category} from "../../models/Category.entity";
 })
 export class AdminComponent implements OnInit, AfterViewInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatTable, { static: true }) table!: MatTable<any>;
+  @ViewChild(MatPaginator) paginatorEvents!: MatPaginator;
+  @ViewChild(MatPaginator) paginatorUsers!: MatPaginator;
+  @ViewChild(MatPaginator) paginatorCategories!: MatPaginator;
+
+  @ViewChild(MatTable, { static: true }) table!: MatTable<Event>;
 
 
   displayedColumns: string[] = [
@@ -55,12 +58,11 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   displayColumnsCategories: string[] = [
     'id',
-  'name'
+    'name'
   ]
 
   dataSource!: MatTableDataSource<Event>;
   dataSourceUsers!: MatTableDataSource<User>;
-
   dataSourceCategories!: MatTableDataSource<Category>
 
 
@@ -83,44 +85,15 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   }
 
-  getAllCategories() {
-    this.categoryService.findAll().subscribe({
-      next: (data) => {
-        this.dataSourceCategories = new MatTableDataSource<Category>(data);
-        this.dataSourceCategories.paginator = this.paginator;
-        this.cdr.detectChanges()
-      },
-      error: () => {
-        this.toastr.error('Error', 'Impossible de charger les événements', {
-          timeOut: 3000,
-          progressBar: true
-        });
-      }
-    })
-  }
 
-  getAllUsers() {
-    this.userService.findAll().subscribe({
-      next: (data) => {
-        this.dataSourceUsers = new MatTableDataSource<User>(data);
-        this.dataSourceUsers.paginator = this.paginator;
-        this.cdr.detectChanges()
-        console.log("tous les users", data)
-      },
-      error: () => {
-        this.toastr.error('Error', 'Impossible de charger les événements', {
-          timeOut: 3000,
-          progressBar: true
-        });
-      }
-    })
-  }
+
+
 
   getAllEvents() {
     this.eventService.findAll().subscribe({
       next: (data) => {
         this.dataSource = new MatTableDataSource<Event>(data);
-        this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginatorEvents;
         this.cdr.detectChanges();
       },
       error: () => {
@@ -130,6 +103,40 @@ export class AdminComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+
+  getAllUsers() {
+    this.userService.findAll().subscribe({
+      next: (data) => {
+        this.dataSourceUsers = new MatTableDataSource<User>(data);
+        // this.dataSourceUsers.paginator = this.paginatorUsers;
+        this.cdr.detectChanges()
+        console.log("tous les users", data)
+      },
+      error: () => {
+        this.toastr.error('Error', 'Impossible de charger les utilisateurs', {
+          timeOut: 3000,
+          progressBar: true
+        });
+      }
+    })
+  }
+
+  getAllCategories() {
+    this.categoryService.findAll().subscribe({
+      next: (data) => {
+        this.dataSourceCategories = new MatTableDataSource<Category>(data);
+        // this.dataSourceCategories.paginator = this.paginatorCategories;
+        this.cdr.detectChanges()
+      },
+      error: () => {
+        this.toastr.error('Error', 'Impossible de charger les catégories', {
+          timeOut: 3000,
+          progressBar: true
+        });
+      }
+    })
   }
 
 
