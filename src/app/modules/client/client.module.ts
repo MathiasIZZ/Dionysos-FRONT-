@@ -33,7 +33,6 @@ import {MaterialModule} from "../../components/shared/material/material.module";
     LoginComponent,
     EditEventComponent,
     EditPanelComponent
-    // ,
     // ListEventComponent
 
   ],

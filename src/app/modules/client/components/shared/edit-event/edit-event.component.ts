@@ -12,6 +12,7 @@ import {Category} from "../../../../../models/Category.entity";
 import {CategoryService} from "../../../../../services/category.service";
 import {TokenStorageService} from "../../../../../auth/token-storage.service";
 import { Router } from '@angular/router';
+import { Marker } from 'src/app/models/Marker.entity';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class EditEventComponent implements OnInit {
   categories: Category[] = [];
   dataFromApiAdresse: any;
   category: Category = new Category();
+  marker: Marker = new Marker();
 
 
 
@@ -106,18 +108,20 @@ export class EditEventComponent implements OnInit {
             // this.event.marker.latitude = lat;
             const lon = jsonData.geometry.coordinates[0];
             const lat = jsonData.geometry.coordinates[1];
+            if(this.event) {
+              this.event.marker = this.marker;
+              if(this.event.marker) {
+                this.event.marker.longitude = lon;
+                this.event.marker.longitude = lat;
+              }
+            }
+           
             console.log('FROM API ADRESSE lon', lon);
             console.log('FROM API ADRESSE lat', lat);
           }
         }
       });
     }
-    // for(let char of nameStreet) {
-    //   if (char.match(" ")) {
-    //     console.log(char.match(" "));
-        
-    //   }
-    // }
 
     if(this.form.get('num')?.value !== " ") {
       let query: string = this.form.get('num')?.value.trim() + "+" + nameStreet.replace(" ","+").replace(" ","+")
@@ -135,6 +139,13 @@ export class EditEventComponent implements OnInit {
             // this.event.marker.latitude = lat;
             const lon = jsonData.geometry.coordinates[0];
             const lat = jsonData.geometry.coordinates[1];
+            if(this.event) {
+              this.event.marker = this.marker;
+              if(this.event.marker) {
+                this.event.marker.longitude = lon;
+                this.event.marker.longitude = lat;
+              }
+            }
             console.log('FROM API ADRESSE lon', lon);
             console.log('FROM API ADRESSE lat', lat);
           }
@@ -173,9 +184,11 @@ export class EditEventComponent implements OnInit {
           });
         }
       });
+     
       this.router.navigateByUrl("/client/event").then(() => {
         // window.location.reload();
-        this.getCurrentPositionEventMarker(this.map);
+        this.addEventOnMap(this.map);
+        // this.getCurrentPositionEventMarker(this.map);
       });
     }
   }
@@ -208,6 +221,28 @@ export class EditEventComponent implements OnInit {
         }
       }
     })
+  }
+  addEventOnMap(map: L.Map): any{
+    this.getAllEvents();
+    map = L.map('map').setView([46.227638, 2.213749], 6);
+    const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 18,
+      minZoom: 5,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,' +
+			' © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+		  zoomOffset: -1
+    });
+    tiles.addTo(map);
+    if(this.event?.marker) {
+      const lon = this.event?.marker?.longitude;
+      const lat = this.event?.marker?.latitude;
+      const marker = L.marker([lat, lon]);
+      marker.bindPopup(this.popupService.makeEventPopup(this.event));
+      marker.addTo(map);
+    }
+  
   }
 
   getAllEvents() {
@@ -243,38 +278,6 @@ export class EditEventComponent implements OnInit {
         console.log("La liste des catégories n'a pas pu être récupérée");
       }
     })
-  }
-
-  getCurrentPositionEventMarker(map: L.Map): any {
-    // Affiche par défaut la carte de la France
-    // Après Autorisation: géolocalisation 
-    map = L.map('map').setView([46.227638, 2.213749], 6);
-    const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-      maxZoom: 18,
-      minZoom: 5,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,' +
-			' © <a href="https://www.mapbox.com/">Mapbox</a>',
-      id: 'mapbox/streets-v11',
-      tileSize: 512,
-		  zoomOffset: -1
-    });
-    tiles.addTo(map);
-    function onLocationFound(e: { accuracy: any; latlng: L.LatLngExpression; }) {
-      var radius = e.accuracy;
-      L.marker(e.latlng).addTo(map)
-          .bindPopup("Vous êtes dans un rayon de " + radius + " métres de l'EVENT crée !!").openPopup();
-  
-      L.circle(e.latlng, radius).addTo(map);
-      console.log(e.latlng);
-    }
-    function onLocationError(e: { message: any; }) {
-      alert(e.message);
-    }
-
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
-
-    map.locate({setView: true, maxZoom: 16});
   }
 
 }

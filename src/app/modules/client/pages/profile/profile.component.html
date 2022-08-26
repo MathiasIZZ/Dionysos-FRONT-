@@ -7,59 +7,60 @@
     </symbol>
   </svg>
   <div class="card text-center">
-  <ng-container *ngIf="user">
-        <div class="mb-3">
-          <h3 >Mon Profil</h3>
+    <ng-container *ngIf="user">
+          <div class="mb-3">
+            <h3 >Mon Profil</h3>
 
-          <img class="mb-3" src="https://images.assetsdelivery.com/compings_v2/123vector/123vector1803/123vector180300209.jpg" alt="..." width="100" height="100">
-          <h5 class="card-title">Photo de {{ user.username }}</h5>
+            <img class="mb-3" src="https://images.assetsdelivery.com/compings_v2/123vector/123vector1803/123vector180300209.jpg" alt="..." width="100" height="100">
+            <h5 class="card-title">Photo de {{ user.username }}</h5>
+          </div>
+    </ng-container>
+
+    <!-- <div class="card-body">
+      <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
+        <div id="alertEmail" class="alert alert-danger alert-dismissible fade show" role="alert"  *ngIf="showErrorEmail">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            {{errorMsg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-  </ng-container>
-  <div class="card-body">
-    <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
-      <div id="alertEmail" class="alert alert-danger alert-dismissible fade show" role="alert"  *ngIf="showErrorEmail">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-        {{errorMsg}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showUpdateEmail">
-      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-      Email modifié avec succès =)
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div class="mb-3">
-        <h5 class="card-title">Modifier son Email</h5>
-        <label class="form-label"> Email address : 
-          <input type="text" formControlName="email" aria-describedby="emailHelp" placeholder="{{ user.email }}" required>
-        </label> 
-        
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-      <button class="btn btn-dark" > Modifier</button> 
-    </form>
-  </div>
-  <div class="card-body">
-  <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="showErrorPassword">
-          {{errorMsg2}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showUpdateEmail">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          Email modifié avec succès =)
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showUpdatePassword">
-        Password modifié avec succès =)
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      <div class="mb-3">
-            <h5 class="card-title">Modifier son Password</h5>
-            <label class="form-label"> Old Password :   
-              <input type="password" formControlName="password" required>
-            </label> 
         </div>
         <div class="mb-3">
-            <label class="form-label"> New Password :   
-                <input type="password" formControlName="newPassword" required>
-            </label>
+          <h5 class="card-title">Modifier son Email</h5>
+          <label class="form-label"> Email address : 
+            <input type="text" formControlName="email" aria-describedby="emailHelp" placeholder="{{ user.email }}" required>
+          </label> 
+          
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
           <button class="btn btn-dark" > Modifier</button> 
-    </form>
-  </div>
-  </div>
+      </form>
+    </div> -->
+    <!-- <div class="card-body">
+      <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="showErrorPassword">
+            {{errorMsg2}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showUpdatePassword">
+          Password modifié avec succès =)
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="mb-3">
+              <h5 class="card-title">Modifier son Password</h5>
+              <label class="form-label"> Old Password :   
+                <input type="password" formControlName="password" required>
+              </label> 
+          </div>
+          <div class="mb-3">
+              <label class="form-label"> New Password :   
+                  <input type="password" formControlName="newPassword" required>
+              </label>
+          </div>
+            <button class="btn btn-dark" > Modifier</button> 
+      </form> 
+    </div>  -->
+  </div> 

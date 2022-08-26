@@ -24,7 +24,7 @@ export class Event {
     // userDislikes?: User[] = [];
     // usersParticipating?: User[] = [];
     category?: Category;
-    // marker?: Marker;
+    marker?: Marker;
     // comments?: Comment[] = [];
     isAlive: boolean = true;
 

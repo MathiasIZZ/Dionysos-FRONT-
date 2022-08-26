@@ -35,8 +35,13 @@ export class ListEventComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if(this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
+      console.log("User by token : ", user);
       this.roles = user.roles;
       this.username = user.username;
+      setTimeout(() => {
+        this.getCurrentPositionEventMarker(this.map);
+      }, 3000);
+      // this.getCurrentPositionEventMarker(this.map);
       // this.makeEventMarkers(this.map);
     }
 
@@ -48,9 +53,7 @@ export class ListEventComponent implements OnInit {
 
   }
 
-
   getAllEvents() {
-
     // Dans le cas d'un visiteur, findAllReducted liste réduite
     // SI USER, utiliser findAll
     if(this.isLoggedIn) {
@@ -120,6 +123,39 @@ export class ListEventComponent implements OnInit {
       }
     })
   }
+  getCurrentPositionEventMarker(map: L.Map): any {
+    // Affiche par défaut la carte de la France
+    // Après Autorisation: géolocalisation 
+    map = L.map('map').setView([46.227638, 2.213749], 6);
+    const tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 18,
+      minZoom: 5,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,' +
+			' © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+		  zoomOffset: -1
+    });
+    tiles.addTo(map);
+    function onLocationFound(e: { accuracy: any; latlng: L.LatLngExpression; }) {
+      var radius = e.accuracy;
+      L.marker(e.latlng).addTo(map)
+          .bindPopup("Vous êtes dans un rayon de " + radius + " métres !!").openPopup();
+  
+      L.circle(e.latlng, radius).addTo(map);
+      console.log(e.latlng);
+      // console.log('GEOLOC : ', e.latlng.lat);
+    }
+    function onLocationError(e: { message: any; }) {
+      alert(e.message);
+    }
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    map.locate({setView: true, maxZoom: 16});
+  }
+
     // TEST GEOCODING API ADRESSE
     getAdresseFromDataGouv() {
       // TEST ADDOK Js adapté mais pas ouf
