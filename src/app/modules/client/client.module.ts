@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatIconModule} from "@angular/material/icon";
 import {MaterialModule} from "../../components/shared/material/material.module";
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -43,7 +44,8 @@ import {MaterialModule} from "../../components/shared/material/material.module";
     ReactiveFormsModule,
     HttpClientModule,
     MatIconModule,
-    MaterialModule
+    MaterialModule,
+    MatTableModule
   ]
 })
 export class ClientModule { }

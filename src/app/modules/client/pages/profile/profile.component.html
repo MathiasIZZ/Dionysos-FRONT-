@@ -11,10 +11,110 @@
           <div class="mb-3">
             <h3 >Mon Profil</h3>
 
-            <img class="mb-3" src="https://images.assetsdelivery.com/compings_v2/123vector/123vector1803/123vector180300209.jpg" alt="..." width="100" height="100">
+            <ng-container *ngIf="role === 'ROLE_ADMIN'">
+              <img class="mb-3" src="../../../../../assets/images/profilimg/mathias.png" alt="..." width="100" height="100">
+            </ng-container>
+            <ng-container *ngIf="role === 'ROLE_USER'">
+              <img class="mb-3" src="../../../../../assets/images/profilimg/najim.png" alt="..." width="100" height="100">
+            </ng-container>
+            <ng-container *ngIf="role === 'ROLE_MODERATOR'">
+              <img class="mb-3" src="../../../../../assets/images/profilimg/nicolas.png" alt="..." width="100" height="100">
+            </ng-container>
+            
             <h5 class="card-title">Photo de {{ user.username }}</h5>
           </div>
     </ng-container>
+
+    <h1>Liste de tous les événements</h1>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" >
+
+        <!-- eventTitle Column -->
+        <ng-container matColumnDef="eventTitle">
+          <th mat-header-cell *matHeaderCellDef> eventTitle </th>
+          <td mat-cell *matCellDef="let element"> {{element.eventTitle}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> city </th>
+          <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="num">
+          <th mat-header-cell *matHeaderCellDef> num </th>
+          <td mat-cell *matCellDef="let element"> {{element.num}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="street">
+          <th mat-header-cell *matHeaderCellDef> street </th>
+          <td mat-cell *matCellDef="let element"> {{element.street}} </td>
+        </ng-container>
+
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="hourBegin">
+          <th mat-header-cell *matHeaderCellDef> hourBegin </th>
+          <td mat-cell *matCellDef="let element"> {{element.hourBegin}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hourEnd">
+          <th mat-header-cell *matHeaderCellDef> hourEnd </th>
+          <td mat-cell *matCellDef="let element"> {{element.hourEnd}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> createdAt </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userLikes">
+          <th mat-header-cell *matHeaderCellDef> userLikes </th>
+          <td mat-cell *matCellDef="let element"> {{element.userLikes}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userDislikes">
+          <th mat-header-cell *matHeaderCellDef> userDislikes </th>
+          <td mat-cell *matCellDef="let element"> {{element.userDislikes}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="usersParticipating">
+          <th mat-header-cell *matHeaderCellDef> usersParticipating </th>
+          <td mat-cell *matCellDef="let element"> {{element.usersParticipating}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="isAlive">
+          <th mat-header-cell *matHeaderCellDef> isAlive </th>
+          <td mat-cell *matCellDef="let element"> {{element.isAlive}} </td>
+        </ng-container> -->
+
+
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="authorId">
+          <th mat-header-cell *matHeaderCellDef> authorId </th>
+          <td mat-cell *matCellDef="let element"> {{element.authorId}} </td>
+        </ng-container> -->
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator 
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page">
+      </mat-paginator>
+    </div>
 
     <!-- <div class="card-body">
       <form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
