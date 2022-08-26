@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { User } from 'src/app/models/user.entity';
 import { UserService } from 'src/app/services/user.service';
@@ -29,22 +29,19 @@ export class AdminComponent implements OnInit, AfterViewInit {
     // '_id',
     'eventTitle',
     'city',
-    'num',
-    'street',
+    // 'num',
+    // 'street',
     'hourBegin',
     'hourEnd',
     'createdAt',
     // 'userLikes',
     // 'userDislikes',
     // 'usersParticipating',
-    // 'category',
-    'isAlive',
+    'category',
+    // 'isAlive',
     'description',
     'authorId'
   ];
-
-
-  events: Event[] = [];
 
   dataSource!: MatTableDataSource<Event>;
 
@@ -53,31 +50,26 @@ export class AdminComponent implements OnInit, AfterViewInit {
   constructor(
     private eventService: EventService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
   ) { }
 
 
   ngOnInit(): void {
     this.getAllEvents();
 
-
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
 
   }
-
-
-
-
 
   getAllEvents() {
     this.eventService.findAll().subscribe({
       next: (data) => {
         this.dataSource = new MatTableDataSource<Event>(data);
         this.dataSource.paginator = this.paginator;
-        this.events = data;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.toastr.error('Error', 'Impossible de charger les événements', {
